@@ -1445,28 +1445,34 @@ $(function () {
     Submit
   </button>
 </form>
-
-<!-- ─── Stub reCAPTCHA & Force JSON for Formspree ─────────────────────────────── -->
+<script src="assets/bundle-26df06bbde665912c7803cd668f15047.js"></script>
 <script>
-  // 1) Stub out grecaptcha so the bundle won’t fail on reCAPTCHA calls
+  /* ——— stub reCAPTCHA so the bundle’s grecaptcha.execute() never explodes ——— */
   window.grecaptcha = window.grecaptcha || { execute: () => Promise.resolve('') };
 
-  // 2) Make every jQuery.ajax to Formspree send Accept: application/json
-  //    and _expect_ a JSON response (dataType: 'json')
-  if (window.jQuery) {
-    jQuery.ajaxSetup({
-      headers: { 'Accept': 'application/json' }
-    });
-    jQuery.ajaxPrefilter(function(options) {
-      if (options.url.indexOf('formspree.io') !== -1) {
+  /* ———   Tweak every $.ajax call that goes to Formspree   ——— */
+  (function ($) {
+    if (!$) return;                 /* should never happen now */
+
+    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+
+      /* only touch Formspree requests */
+      if (options.url && options.url.indexOf('formspree.io') !== -1) {
+
+        /* 1. kill the custom header that triggers the CORS pre-flight */
+        if (options.headers && options.headers['X-API-VERSION'])
+          delete options.headers['X-API-VERSION'];
+
+        /* 2. be polite and ask for JSON */
+        options.headers = options.headers || {};
+        options.headers['Accept'] = 'application/json';
+
+        /* 3. make sure jQuery parses the JSON response as success */
         options.dataType = 'json';
       }
     });
-  }
+  })(window.jQuery);
 </script>
-<!-- ─── The original B12 bundle that wires up calendar, validation & modal ────── -->
-<script src="assets/bundle-26df06bbde665912c7803cd668f15047.js"></script>
-
 
 
 <div class="b12-form-error">
