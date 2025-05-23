@@ -1174,226 +1174,306 @@ $(function () {
   rel="stylesheet">
  -->
 <!-- ─── Replace your existing <form> … </form> with this block ─────────────────── -->
-<style>
-  .meeting-form {
-    max-width: 600px;
-    margin: 2rem auto;
-    font-family: Arial, sans-serif;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .meeting-form header {
-    background: #4CAF50;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.25rem;
-    text-transform: uppercase;
-  }
-  .calendar-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5rem 1rem;
-    background: #f7f7f7;
-  }
-  .calendar-nav button {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  .calendar-nav .month {
-    font-weight: bold;
-  }
-  .weekday-row {
-    display: flex;
-    background: #fff;
-    border-bottom: 1px solid #ddd;
-  }
-  .weekday-row .day {
-    flex: 1;
-    text-align: center;
-    padding: .5rem 0;
-    position: relative;
-  }
-  .weekday-row .day.selected .circle {
-    background: #000;
-    color: #fff;
-  }
-  .weekday-row .day .circle {
-    display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    line-height: 2rem;
-    border-radius: 50%;
-  }
-  .slots-grid {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  .slots-grid .col {
-    flex: 1;
-  }
-  .slots-grid .col .label {
-    font-weight: bold;
-    margin-bottom: .5rem;
-  }
-  .slots-grid .col button {
-    display: block;
-    width: 100%;
-    padding: .5rem;
-    margin-bottom: .5rem;
-    border: 1px solid #ccc;
-    background: #fff;
-    cursor: pointer;
-    text-align: left;
-  }
-  .timezone {
-    text-align: center;
-    font-size: .9rem;
-    padding: 0 .5rem 1rem;
-    color: #555;
-  }
-  .meeting-form form {
-    padding: 0 1rem 1rem;
-    background: #fff;
-  }
-  .meeting-form .form-group {
-    margin-bottom: 1rem;
-  }
-  .meeting-form label {
-    display: block;
-    margin-bottom: .25rem;
-    font-weight: bold;
-  }
-  .meeting-form input,
-  .meeting-form textarea {
-    width: 100%;
-    padding: .5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .checkbox-group {
-    margin-bottom: 1rem;
-  }
-  .checkbox-group label {
-    display: flex;
-    align-items: center;
-    margin-bottom: .5rem;
-  }
-  .checkbox-group input {
-    margin-right: .5rem;
-  }
-  .submit-btn {
-    width: 100%;
-    padding: 1rem;
-    background: #4CAF50;
-    color: #fff;
-    border: none;
-    font-size: 1rem;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-</style>
 
-<div class="meeting-form">
-  <header>Meeting Request Form</header>
 
-  <!-- Calendar header -->
-  <div class="calendar-nav">
-    <button type="button" class="prev">&lt;</button>
-    <div class="month">May 2025</div>
-    <button type="button" class="next">&gt;</button>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-+cf...your-integrity-hash..."
+    crossorigin="anonymous">
+
+  <!-- Flatpickr CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    rel="stylesheet">
+
+  <style>
+    /* Optional: make the active slot stand out */
+    #slots-container .btn.active {
+      background-color: #198754;
+      color: #fff;
+    }
+  </style>
+
+<body>
+  <div class="container py-5">
+    <h1 class="mb-4 text-center">Meeting Request Form</h1>
+
+    <form id="appointment-form" novalidate>
+      <!-- 1) Date picker (weekdays only) -->
+      <div class="mb-3">
+        <label for="appointment-date" class="form-label">Select date</label>
+        <input 
+          type="text" 
+          id="appointment-date"
+          class="form-control" 
+          placeholder="Click to pick a date"
+          required>
+        <div class="invalid-feedback">Please choose a weekday.</div>
+      </div>
+
+      <!-- 2) Timezone select -->
+      <div class="mb-3">
+        <label for="timezone-select" class="form-label">Timezone</label>
+        <select id="timezone-select" class="form-select" required>
+          <option value="">Loading…</option>
+        </select>
+        <div class="invalid-feedback">Please choose a timezone.</div>
+      </div>
+
+      <!-- 3) Time slots -->
+      <div class="mb-3">
+        <label class="form-label">Available time slots</label>
+        <div id="slots-container" class="row g-2"></div>
+        <div id="slot-feedback" class="invalid-feedback d-block" style="display:none">
+          Please select a time slot.
+        </div>
+        <!-- hidden to capture the chosen slot -->
+        <input type="hidden" name="selected_slot" id="selected-slot" required>
+      </div>
+
+      <!-- 4) Name -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Name *</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          class="form-control" 
+          placeholder="Jane Smith" 
+          required>
+        <div class="invalid-feedback">Please enter your name.</div>
+      </div>
+
+      <!-- 5) Email (_replyto for Formspree) -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address *</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="_replyto" 
+          class="form-control" 
+          placeholder="email@website.com" 
+          required>
+        <div class="invalid-feedback">Please enter a valid email.</div>
+      </div>
+
+      <!-- 6) Phone -->
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone number *</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          class="form-control" 
+          placeholder="555-555-5555" 
+          required>
+        <div class="invalid-feedback">Please enter your phone number.</div>
+      </div>
+
+      <!-- 7) Services checkboxes -->
+      <fieldset class="mb-3">
+        <legend class="form-label">Which service(s) are you interested in?</legend>
+        <div class="form-check">
+          <input 
+            class="form-check-input" 
+            type="checkbox" 
+            id="svc1" 
+            name="services[]" 
+            value="Digital coaching and training">
+          <label class="form-check-label" for="svc1">
+            Digital coaching and training
+          </label>
+        </div>
+        <div class="form-check">
+          <input 
+            class="form-check-input" 
+            type="checkbox" 
+            id="svc2" 
+            name="services[]" 
+            value="Consulting services">
+          <label class="form-check-label" for="svc2">
+            Consulting services
+          </label>
+        </div>
+        <div class="form-check">
+          <input 
+            class="form-check-input" 
+            type="checkbox" 
+            id="svc3" 
+            name="services[]" 
+            value="Executive role support">
+          <label class="form-check-label" for="svc3">
+            Executive role support
+          </label>
+        </div>
+        <div id="servicesFeedback" class="invalid-feedback">
+          Please select at least one service.
+        </div>
+      </fieldset>
+
+      <!-- 8) Message -->
+      <div class="mb-3">
+        <label for="message" class="form-label">Message</label>
+        <textarea 
+          id="message" 
+          name="message" 
+          class="form-control" 
+          rows="4" 
+          placeholder="Your message…"></textarea>
+      </div>
+
+      <!-- Honeypot to reduce spam -->
+      <input type="text" name="_gotcha" style="display:none!important" tabindex="-1">
+
+      <button type="submit" class="btn btn-success w-100">Submit</button>
+    </form>
   </div>
 
-  <!-- Week day selector -->
-  <div class="weekday-row">
-    <div class="day selected"><span class="circle">26</span><div>Mon</div></div>
-    <div class="day"><span class="circle">27</span><div>Tue</div></div>
-    <div class="day"><span class="circle">28</span><div>Wed</div></div>
-    <div class="day"><span class="circle">29</span><div>Thu</div></div>
-    <div class="day"><span class="circle">30</span><div>Fri</div></div>
-    <div class="day"><span class="circle">31</span><div>Sat</div></div>
-    <div class="day"><span class="circle">1</span><div>Sun</div></div>
-  </div>
-
-  <!-- Time slots -->
-  <div class="slots-grid">
-    <div class="col">
-      <div class="label">Morning</div>
-      <button type="button">9:00 – 9:30 am</button>
-      <button type="button">9:30 – 10:00 am</button>
-      <button type="button">10:00 – 10:30 am</button>
-      <button type="button">10:30 – 11:00 am</button>
-      <button type="button">11:00 – 11:30 am</button>
-      <button type="button">11:30 – 12:00 pm</button>
-    </div>
-    <div class="col">
-      <div class="label">Afternoon</div>
-      <button type="button">12:00 – 12:30 pm</button>
-      <button type="button">12:30 – 1:00 pm</button>
-      <button type="button">1:00 – 1:30 pm</button>
-      <button type="button">1:30 – 2:00 pm</button>
-      <button type="button">2:00 – 2:30 pm</button>
-      <button type="button">2:30 – 3:00 pm</button>
-      <button type="button">3:00 – 3:30 pm</button>
-      <button type="button">3:30 – 4:00 pm</button>
-      <button type="button">4:00 – 4:30 pm</button>
-      <button type="button">4:30 – 5:00 pm</button>
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <h5 class="mb-3">Thank you!</h5>
+          <p>Your appointment request has been submitted. We’ll be in touch shortly.</p>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="timezone">(GMT+05:30) Asia — Calcutta</div>
+  <!-- Bootstrap JS Bundle -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-cT...your-integrity-hash..."
+    crossorigin="anonymous"></script>
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-  <!-- Form -->
-  <form
-    action="https://formspree.io/f/mnndyrnw"
-    method="POST"
-    novalidate>
-    <!-- honeypot -->
-    <input type="text" name="_gotcha" style="display:none!important" tabindex="-1">
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Populate timezones
+      var tzSelect = document.getElementById('timezone-select');
+      tzSelect.innerHTML = '<option value="">Select timezone</option>';
+      var zones = Intl.supportedValuesOf
+        ? Intl.supportedValuesOf('timeZone')
+        : ['Asia/Kolkata','UTC'];
+      zones.forEach(function(tz){
+        var opt = document.createElement('option');
+        opt.value = tz; opt.textContent = tz;
+        tzSelect.append(opt);
+      });
 
-    <div class="form-group">
-      <label for="name">Name *</label>
-      <input id="name" name="name" type="text" required placeholder="Jane Smith">
-    </div>
+      // Initialize date picker (disable weekends)
+      flatpickr("#appointment-date", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        disable: [
+          function(date){ return (date.getDay() === 0 || date.getDay() === 6); }
+        ],
+        onChange: function(selectedDates){
+          generateSlots();
+        }
+      });
 
-    <div class="form-group">
-      <label for="email">Email address *</label>
-      <input id="email" name="_replyto" type="email" required placeholder="email@website.com">
-    </div>
+      var slotsContainer = document.getElementById('slots-container');
+      var selectedSlot = document.getElementById('selected-slot');
 
-    <div class="form-group">
-      <label for="phone">Phone number *</label>
-      <input id="phone" name="phone" type="tel" required placeholder="555-555-5555">
-    </div>
+      function generateSlots() {
+        slotsContainer.innerHTML = '';
+        selectedSlot.value = '';
+        var startHour = 9, endHour = 17;
+        for (var h = startHour; h < endHour; h++) {
+          ['00','30'].forEach(function(min){
+            var timeLabel = h + ':' + min;
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'btn btn-outline-secondary';
+            btn.style.width='100%';
+            btn.textContent = formatTime(h, min);
+            btn.addEventListener('click', function(){
+              // clear active
+              slotsContainer.querySelectorAll('.btn').forEach(function(b){
+                b.classList.remove('active');
+              });
+              this.classList.add('active');
+              selectedSlot.value = this.textContent;
+            });
+            var col = document.createElement('div');
+            col.className = 'col-6';
+            col.appendChild(btn);
+            slotsContainer.appendChild(col);
+          });
+        }
+      }
 
-    <div class="checkbox-group">
-      <label>
-        <input type="checkbox" name="services[]" value="Digital coaching and training">
-        Digital coaching and training
-      </label>
-      <label>
-        <input type="checkbox" name="services[]" value="Consulting services">
-        Consulting services
-      </label>
-      <label>
-        <input type="checkbox" name="services[]" value="Executive role support">
-        Executive role support
-      </label>
-    </div>
+      function formatTime(hour, min) {
+        var h = hour % 12 === 0 ? 12 : hour % 12;
+        var ampm = hour < 12 ? 'am' : 'pm';
+        return h + ':' + min + ' ' + ampm;
+      }
 
-    <div class="form-group">
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="4" placeholder="Your message…"></textarea>
-    </div>
+      // generate initial slots for today if weekday
+      generateSlots();
 
-    <button type="submit" class="submit-btn">Submit</button>
-  </form>
-</div>
+      // Form submit handler
+      var form = document.getElementById('appointment-form');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        // hide any prior validation UI
+        form.classList.remove('was-validated');
+        document.getElementById('slot-feedback').style.display = 'none';
+        document.getElementById('servicesFeedback').style.display = 'none';
+
+        // custom validations
+        var valid = true;
+        if (!form.checkValidity()) valid = false;
+        if (!selectedSlot.value) {
+          document.getElementById('slot-feedback').style.display = 'block';
+          valid = false;
+        }
+        if (form.querySelectorAll('input[name="services[]"]:checked').length === 0) {
+          document.getElementById('servicesFeedback').style.display = 'block';
+          valid = false;
+        }
+
+        if (!valid) {
+          form.classList.add('was-validated');
+          return;
+        }
+
+        // Assemble FormData
+        var fd = new FormData(form);
+        // add date & timezone
+        fd.set('appointment_date', document.getElementById('appointment-date').value);
+        fd.set('timezone', tzSelect.value);
+
+        // POST to Formspree
+        fetch('https://formspree.io/f/mnndyrnw', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: fd
+        })
+        .then(function(resp){
+          if (resp.ok) {
+            new bootstrap.Modal(document.getElementById('successModal')).show();
+            form.reset();
+            generateSlots();
+          } else {
+            throw new Error('Network response was not OK');
+          }
+        })
+        .catch(function(){
+          alert('Sorry, we couldn’t submit. Please try again.');
+        });
+      });
+    });
+  </script>
+
 
     <script>
       $(function() {
