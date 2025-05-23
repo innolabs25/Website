@@ -949,7 +949,7 @@ $(function () {
 
 
 </p><div data-aos="slide-up" data-aos-offset="120" data-aos-delay="150" data-aos-duration="400" data-aos-easing="ease-in-out" data-aos-once="true" class="sb-contact-form contact-form option-width sb-section-alignable" data-sb-uuid="4c38e346-5982-48a3-bdc8-3fb73a302cd0" id="contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
-<form class="form js-form" data-recaptcha-version="1" data-sb-type="contact_form" data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca" data-semantic-tag-blueprint="automated-scheduling-page-form" data-send-type="ajax" id="UL_FORM_5ef74c3c-b4b9-46c5-b4b6-6494542154fa">
+<!-- <form class="form js-form" data-recaptcha-version="1" data-sb-type="contact_form" data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca" data-semantic-tag-blueprint="automated-scheduling-page-form" data-send-type="ajax" id="UL_FORM_5ef74c3c-b4b9-46c5-b4b6-6494542154fa">
     
     
     
@@ -1159,7 +1159,22 @@ $(function () {
     
     
     <button class="sb-button sb-button--form contact-form__btn" data-component-field="form_details" data-sb-field="button_label" data-sb-is-link="" data-sb-type="text" data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca" type="submit">Submit</button>
+</form> -->
+
+<form
+  id="scheduling-form"
+  class="form"
+  method="POST"
+  action="https://formspree.io/f/mnndyrnw">
+  
+  <!-- your inputs… -->
+  <input type="email" name="_replyto" placeholder="Your email" required>
+  <input type="text"  name="name"     placeholder="Your name"  required>
+  <textarea name="message" placeholder="Your message"></textarea>
+  
+  <button type="submit">Submit</button>
 </form>
+
 <div class="b12-form-error">
     Sorry, we were not able to submit the form. Please review the errors and try again.
   </div>
