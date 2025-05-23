@@ -1162,18 +1162,346 @@ $(function () {
 </form> -->
 
 <form
-  id="scheduling-form"
-  class="form"
+  id="UL_FORM_5ef74c3c-b4b9-46c5-b4b6-6494542154fa"
+  class="form js-form"
+  data-recaptcha-version="1"
+  data-sb-type="contact_form"
+  data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+  data-semantic-tag-blueprint="automated-scheduling-page-form"
+  data-send-type="ajax"
   method="POST"
   action="https://formspree.io/f/mnndyrnw">
-  
-  <!-- your inputs… -->
-  <input type="email" name="_replyto" placeholder="Your email" required>
-  <input type="text"  name="name"     placeholder="Your name"  required>
-  <textarea name="message" placeholder="Your message"></textarea>
-  
-  <button type="submit">Submit</button>
+
+  <!-- honeypot to reduce spam -->
+  <input type="text" name="_gotcha" style="display:none!important" tabindex="-1">
+
+  <!-- 1) Date & time picker -->
+  <div data-is-required="true" class="form__group  form__group--required">
+    <label
+      class="form__label contact-form__label"
+      data-component-field="field"
+      data-sb-field="custom_fields"
+      data-sb-is-link=""
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      for="93eac547-d092-427d-92b3-ed99d6058db8-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Select a date and time <span class="form__label-required" title="This field is required">*</span>
+    </label>
+    <input name="appointment_start_at" type="hidden" value="">
+    <div class="js-prevent-preview-frame-click" skip-data-sb="">
+      <p></p>
+      <div class="sb-bookings-appointment__wrapper sb-bookings-appointment--inline">
+        <div class="appointment-calendar__selected-date-wrapper">
+          <span class="appointment-calendar__selected-date"></span>
+          <span class="appointment-calendar__selected-date-error">Select a date and time</span>
+        </div>
+        <div class="appointment-calendar">
+          <div class="appointment-calendar__date">
+            <button aria-label="Previous month"
+                    class="appointment-calendar__date-btn appointment-calendar__date-btn--prev"
+                    type="button">
+              <svg height="12" viewBox="0 0 7 11" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M0 5.4l5.4 5.4 1.4-1.4-4-4 4-4L5.4 0z"></path></svg>
+            </button>
+            <button aria-label="Next month"
+                    class="appointment-calendar__date-btn appointment-calendar__date-btn--next"
+                    type="button">
+              <svg height="12" viewBox="0 0 7 11" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M6.8 5.4l-5.4 5.4L0 9.4l4-4-4-4L1.4 0" fill-rule="nonzero"></path></svg>
+            </button>
+            <div aria-label="Current month" class="appointment-calendar__date-date">
+              September <span class="appointment-calendar__date-date-month">2018</span>
+            </div>
+          </div>
+          <div class="appointment-calendar__weekdays">
+            <div class="appointment-calendar__weekdays-item appointment-calendar__weekdays-item--prev js-bookings-week-prev">
+              <div class="appointment-calendar__weekdays-item-weekday">&nbsp;</div>
+              <button aria-label="Previous day"
+                      class="appointment-calendar__weekdays-item-btn appointment-calendar__weekdays-item-btn--prev"
+                      type="button">
+                <span>
+                  <svg height="12" viewBox="0 0 7 11" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M0 5.4l5.4 5.4 1.4-1.4-4-4 4-4L5.4 0z"></path></svg>
+                </span>
+              </button>
+            </div>
+            <div class="appointment-calendar__weekdays-item">
+              <div class="appointment-calendar__weekdays-item-weekday">Mon</div>
+              <button class="appointment-calendar__weekdays-item-btn" type="button"><span></span></button>
+            </div>
+            <div class="appointment-calendar__weekdays-item">
+              <div class="appointment-calendar__weekdays-item-weekday">Tue</div>
+              <button class="appointment-calendar__weekdays-item-btn" type="button"><span></span></button>
+            </div>
+            <div class="appointment-calendar__weekdays-item">
+              <div class="appointment-calendar__weekdays-item-weekday">Wed</div>
+              <button class="appointment-calendar__weekdays-item-btn" type="button"><span></span></button>
+            </div>
+            <div class="appointment-calendar__weekdays-item">
+              <div class="appointment-calendar__weekdays-item-weekday">Thu</div>
+              <button class="appointment-calendar__weekdays-item-btn" type="button"><span></span></button>
+            </div>
+            <div class="appointment-calendar__weekdays-item">
+              <div class="appointment-calendar__weekdays-item-weekday">Fri</div>
+              <button class="appointment-calendar__weekdays-item-btn" type="button"><span></span></button>
+            </div>
+            <div class="appointment-calendar__weekdays-item">
+              <div class="appointment-calendar__weekdays-item-weekday">Sat</div>
+              <button class="appointment-calendar__weekdays-item-btn" type="button"><span></span></button>
+            </div>
+            <div class="appointment-calendar__weekdays-item">
+              <div class="appointment-calendar__weekdays-item-weekday">Sun</div>
+              <button class="appointment-calendar__weekdays-item-btn" type="button"><span></span></button>
+            </div>
+            <div class="appointment-calendar__weekdays-item appointment-calendar__weekdays-item--next js-bookings-week-next">
+              <div class="appointment-calendar__weekdays-item-weekday">&nbsp;</div>
+              <button aria-label="Next day"
+                      class="appointment-calendar__weekdays-item-btn appointment-calendar__weekdays-item-btn--next"
+                      type="button">
+                <span>
+                  <svg height="12" viewBox="0 0 7 11" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M6.8 5.4l-5.4 5.4L0 9.4l4-4-4-4L1.4 0" fill-rule="nonzero"></path></svg>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="appointment-calendar__day">
+            <div class="appointment-calendar__day-part morning">
+              <div class="appointment-calendar__day-part-title">Morning</div>
+              <div class="appointment-calendar__day-part-items"></div>
+            </div>
+            <div class="appointment-calendar__day-part afternoon">
+              <div class="appointment-calendar__day-part-title">Afternoon</div>
+              <div class="appointment-calendar__day-part-items"></div>
+            </div>
+            <div class="appointment-calendar__day-part evening">
+              <div class="appointment-calendar__day-part-title">Evening</div>
+              <div class="appointment-calendar__day-part-items"></div>
+            </div>
+            <div class="appointment-calendar__day-empty">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M15,2 L13,2 L13,0 L11,0 L11,2 L9,2 L9,0 L7,0 L7,2 L5,2 L5,0 L3,0 L3,2 L1,2 C0.447,2 0,2.447 0,3 L0,15 C0,15.553 0.447,16 1,16 L15,16 C15.553,16 16,15.553 16,15 L16,3 C16,2.447 15.553,2 15,2 Z M14,14 L2,14 L2,6 L14,6 L14,14 Z"></path></svg>
+              <p class="appointment-calendar__day-empty-title">No availability, try another day</p>
+            </div>
+          </div>
+          <div class="appointment-calendar__timezone">
+            <button aria-label="Toggle the timezone select dropdown"
+                    class="appointment-calendar__timezone-toggle-dropdown-btn"
+                    type="button">
+              <svg class="appointment-calendar__timezone-toggle-dropdown-btn-globe" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8.5,0a8,8,0,1,0,8,8A8,8,0,0,0,8.5,0Zm5.9,7H12.5a16.57,16.57,0,0,0-.8-4.1A6.17,6.17,0,0,1,14.4,7ZM8.5,14c-.6,0-1.8-1.9-2-5h4C10.3,12.1,9.1,14,8.5,14Zm-2-7c.2-3.1,1.3-5,2-5s1.8,1.9,2,5ZM5.4,2.9A13,13,0,0,0,4.5,7H2.6A6,6,0,0,1,5.4,2.9ZM2.6,9H4.5a16.57,16.57,0,0,0,.8,4.1A6.17,6.17,0,0,1,2.6,9Zm9,4.1A13,13,0,0,0,12.4,9h1.9A5.55,5.55,0,0,1,11.6,13.1Z"></path></svg>
+              <span class="appointment-calendar__timezone-toggle-dropdown-btn-text"></span>
+              <svg class="appointment-calendar__timezone-toggle-dropdown-btn-caret" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path d="M 4 17 L 25 39 L 46 17 Z "></path></svg>
+            </button>
+            <div class="appointment-calendar__timezone-dropdown">
+              <div class="appointment-calendar__timezone-dropdown-search">
+                <svg viewBox="0 0 56.966 56.966" xmlns="http://www.w3.org/2000/svg"><path d="M55.146 51.887L41.588 37.786c3.486-4.144 5.396-9.358 5.396-14.786 0-12.682-10.318-23-23-23s-23-10.318-23-23 10.318-23 23-23 23,10.318,23,23,10.318,23,23,23"></path></svg>
+                <input class="appointment-calendar__timezone-dropdown-search-input" placeholder="Search timezones" type="text">
+              </div>
+              <ul class="appointment-calendar__timezone-dropdown-list"></ul>
+              <div class="appointment-calendar__timezone-dropdown-empty">No matches</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input
+      required
+      class="form__input contact-form__input js-booking-placeholder"
+      data-sb-field="custom_fields"
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      id="93eac547-d092-427d-92b3-ed99d6058db8-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="booking"
+      placeholder="Select a date and time..."
+      type="hidden"
+      value="">
+
+  <!-- 2) Name -->
+  <div data-is-required="true" class="form__group form__group--required">
+    <label
+      class="form__label contact-form__label"
+      data-component-field="field"
+      data-sb-field="custom_fields"
+      data-sb-is-link=""
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      for="8f9b07d4-db3c-4520-bdf1-5dc021dff619-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Name <span class="form__label-required">*</span>
+    </label>
+    <input
+      required
+      class="form__input contact-form__input"
+      data-sb-field="custom_fields"
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      id="8f9b07d4-db3c-4520-bdf1-5dc021dff619-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="name"
+      placeholder="Jane Smith"
+      type="text"
+      value="">
+  </div>
+
+  <!-- 3) Email (_replyto for Formspree) -->
+  <div data-is-required="true" class="form__group form__group--required">
+    <label
+      class="form__label contact-form__label"
+      data-component-field="field"
+      data-sb-field="custom_fields"
+      data-sb-is-link=""
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      for="7f69bb66-c941-402e-9cfd-8325cab030ea-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Email address <span class="form__label-required">*</span>
+    </label>
+    <input
+      required
+      class="form__input contact-form__input"
+      data-sb-field="custom_fields"
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      id="7f69bb66-c941-402e-9cfd-8325cab030ea-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="_replyto"
+      placeholder="email@website.com"
+      type="email"
+      value="">
+  </div>
+
+  <!-- 4) Phone -->
+  <div data-is-required="true" class="form__group form__group--required">
+    <label
+      class="form__label contact-form__label"
+      data-component-field="field"
+      data-sb-field="custom_fields"
+      data-sb-is-link=""
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      for="baca5032-aeb2-45a1-a754-88d5d73844ed-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Phone number <span class="form__label-required">*</span>
+    </label>
+    <input
+      required
+      class="form__input contact-form__input"
+      data-sb-field="custom_fields"
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      id="baca5032-aeb2-45a1-a754-88d5d73844ed-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="from_phone"
+      placeholder="555-555-5555"
+      type="tel"
+      value="">
+  </div>
+
+  <!-- 5) Services checkboxes -->
+  <div class="form__group form__group--checkbox">
+    <label
+      class="form__label contact-form__label"
+      data-component-field="field"
+      data-sb-field="custom_fields"
+      data-sb-is-link=""
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      for="4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Which service or services are you interested in?
+    </label>
+    <div class="form__checkbox-error"
+         id="checkbox-error-message-4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Please select at least one option.
+    </div>
+    <input
+      type="hidden"
+      class="form__input form__input--checkbox-default"
+      id="checkbox-default-value-4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="Which service or services are you interested in?"
+      value="No options selected">
+
+    <div class="form__input-checkbox-wrapper">
+      <input
+        class="form__input form__input--checkbox"
+        id="0254cf45-fa05-4af3-85b7-d1d5289ff716-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+        name="Which service or services are you interested in?"
+        type="checkbox"
+        value="Digital coaching and training">
+      <label
+        class="form__label contact-form__label form__label--font-normal"
+        data-component-field="checkbox"
+        data-sb-field="custom_fields"
+        data-sb-is-link=""
+        data-sb-type="contact_form"
+        data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+        for="0254cf45-fa05-4af3-85b7-d1d5289ff716-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+        Digital coaching and training
+      </label>
+    </div>
+    <div class="form__input-checkbox-wrapper">
+      <input
+        class="form__input form__input--checkbox"
+        id="2e168830-593a-4ad8-bac8-20bfde4da6a4-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+        name="Which service or services are you interested in?"
+        type="checkbox"
+        value="Consulting services">
+      <label
+        class="form__label contact-form__label form__label--font-normal"
+        data-component-field="checkbox"
+        data-sb-field="custom_fields"
+        data-sb-is-link=""
+        data-sb-type="contact_form"
+        data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+        for="2e168830-593a-4ad8-bac8-20bfde4da6a4-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+        Consulting services
+      </label>
+    </div>
+    <div class="form__input-checkbox-wrapper">
+      <input
+        class="form__input form__input--checkbox"
+        id="5a2f36cf-cc48-40e0-b4aa-585fcf8828ff-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+        name="Which service or services are you interested in?"
+        type="checkbox"
+        value="Executive role support">
+      <label
+        class="form__label contact-form__label form__label--font-normal"
+        data-component-field="checkbox"
+        data-sb-field="custom_fields"
+        data-sb-is-link=""
+        data-sb-type="contact_form"
+        data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+        for="5a2f36cf-cc48-40e0-b4aa-585fcf8828ff-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+        Executive role support
+      </label>
+    </div>
+  </div>
+
+  <!-- 6) Message -->
+  <div class="form__group">
+    <label
+      class="form__label contact-form__label"
+      data-component-field="field"
+      data-sb-field="custom_fields"
+      data-sb-is-link=""
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      for="6aa5d351-548b-451e-b47a-a92a1e3c99e6-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Message
+    </label>
+    <textarea
+      class="form__input form__input--textarea contact-form__textarea"
+      data-sb-field="custom_fields"
+      data-sb-type="contact_form"
+      data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+      id="6aa5d351-548b-451e-b47a-a92a1e3c99e6-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="message"
+      rows="4"></textarea>
+  </div>
+
+  <button
+    class="sb-button sb-button--form contact-form__btn"
+    data-component-field="form_details"
+    data-sb-field="button_label"
+    data-sb-is-link=""
+    data-sb-type="text"
+    data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
+    type="submit">
+    Submit
+  </button>
 </form>
+
+<!-- Keep the B12 bundle to power the calendar, validation & modal -->
+<script src="assets/bundle-26df06bbde665912c7803cd668f15047.js"></script>
+
 
 <div class="b12-form-error">
     Sorry, we were not able to submit the form. Please review the errors and try again.
