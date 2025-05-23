@@ -1164,7 +1164,7 @@ $(function () {
 <!-- … somewhere in your body, replace your old <form> with this exact block … -->
 <!-- ─── Your FormSpree-powered Form ───────────────────────────────────────────── -->
 <!-- ─── In your <head> section, include Bootstrap CSS and Flatpickr CSS ───────── -->
-<link
+<!-- <link
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.1/dist/css/bootstrap.min.css"
   rel="stylesheet"
   integrity="sha384-+cf...your-integrity-hash..."
@@ -1172,185 +1172,229 @@ $(function () {
 <link
   href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
   rel="stylesheet">
-
+ -->
 <!-- ─── Replace your existing <form> … </form> with this block ─────────────────── -->
-<form id="appointment-form" novalidate>
-  <!-- 1) Date & Time -->
-  <div class="mb-3">
-    <label for="appointment" class="form-label">Select date and time</label>
-    <input
-      type="text"
-      class="form-control"
-      id="appointment"
-      name="appointment"
-      placeholder="Choose date &amp; time"
-      required>
-    <div class="invalid-feedback">Please select a date and time.</div>
+<style>
+  .meeting-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .meeting-form header {
+    background: #4CAF50;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+  }
+  .calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+    background: #f7f7f7;
+  }
+  .calendar-nav button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .calendar-nav .month {
+    font-weight: bold;
+  }
+  .weekday-row {
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  .weekday-row .day {
+    flex: 1;
+    text-align: center;
+    padding: .5rem 0;
+    position: relative;
+  }
+  .weekday-row .day.selected .circle {
+    background: #000;
+    color: #fff;
+  }
+  .weekday-row .day .circle {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 50%;
+  }
+  .slots-grid {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .slots-grid .col {
+    flex: 1;
+  }
+  .slots-grid .col .label {
+    font-weight: bold;
+    margin-bottom: .5rem;
+  }
+  .slots-grid .col button {
+    display: block;
+    width: 100%;
+    padding: .5rem;
+    margin-bottom: .5rem;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+  }
+  .timezone {
+    text-align: center;
+    font-size: .9rem;
+    padding: 0 .5rem 1rem;
+    color: #555;
+  }
+  .meeting-form form {
+    padding: 0 1rem 1rem;
+    background: #fff;
+  }
+  .meeting-form .form-group {
+    margin-bottom: 1rem;
+  }
+  .meeting-form label {
+    display: block;
+    margin-bottom: .25rem;
+    font-weight: bold;
+  }
+  .meeting-form input,
+  .meeting-form textarea {
+    width: 100%;
+    padding: .5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .checkbox-group {
+    margin-bottom: 1rem;
+  }
+  .checkbox-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: .5rem;
+  }
+  .checkbox-group input {
+    margin-right: .5rem;
+  }
+  .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+</style>
+
+<div class="meeting-form">
+  <header>Meeting Request Form</header>
+
+  <!-- Calendar header -->
+  <div class="calendar-nav">
+    <button type="button" class="prev">&lt;</button>
+    <div class="month">May 2025</div>
+    <button type="button" class="next">&gt;</button>
   </div>
 
-  <!-- 2) Name -->
-  <div class="mb-3">
-    <label for="name" class="form-label">Name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="name"
-      name="name"
-      placeholder="Jane Smith"
-      required>
-    <div class="invalid-feedback">Please enter your name.</div>
+  <!-- Week day selector -->
+  <div class="weekday-row">
+    <div class="day selected"><span class="circle">26</span><div>Mon</div></div>
+    <div class="day"><span class="circle">27</span><div>Tue</div></div>
+    <div class="day"><span class="circle">28</span><div>Wed</div></div>
+    <div class="day"><span class="circle">29</span><div>Thu</div></div>
+    <div class="day"><span class="circle">30</span><div>Fri</div></div>
+    <div class="day"><span class="circle">31</span><div>Sat</div></div>
+    <div class="day"><span class="circle">1</span><div>Sun</div></div>
   </div>
 
-  <!-- 3) Email -->
-  <div class="mb-3">
-    <label for="email" class="form-label">Email address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="email"
-      name="_replyto"
-      placeholder="email@website.com"
-      required>
-    <div class="invalid-feedback">Please enter a valid email address.</div>
+  <!-- Time slots -->
+  <div class="slots-grid">
+    <div class="col">
+      <div class="label">Morning</div>
+      <button type="button">9:00 – 9:30 am</button>
+      <button type="button">9:30 – 10:00 am</button>
+      <button type="button">10:00 – 10:30 am</button>
+      <button type="button">10:30 – 11:00 am</button>
+      <button type="button">11:00 – 11:30 am</button>
+      <button type="button">11:30 – 12:00 pm</button>
+    </div>
+    <div class="col">
+      <div class="label">Afternoon</div>
+      <button type="button">12:00 – 12:30 pm</button>
+      <button type="button">12:30 – 1:00 pm</button>
+      <button type="button">1:00 – 1:30 pm</button>
+      <button type="button">1:30 – 2:00 pm</button>
+      <button type="button">2:00 – 2:30 pm</button>
+      <button type="button">2:30 – 3:00 pm</button>
+      <button type="button">3:00 – 3:30 pm</button>
+      <button type="button">3:30 – 4:00 pm</button>
+      <button type="button">4:00 – 4:30 pm</button>
+      <button type="button">4:30 – 5:00 pm</button>
+    </div>
   </div>
 
-  <!-- 4) Phone -->
-  <div class="mb-3">
-    <label for="phone" class="form-label">Phone number</label>
-    <input
-      type="tel"
-      class="form-control"
-      id="phone"
-      name="phone"
-      placeholder="555-555-5555"
-      required>
-    <div class="invalid-feedback">Please enter your phone number.</div>
-  </div>
+  <div class="timezone">(GMT+05:30) Asia — Calcutta</div>
 
-  <!-- 5) Services Checkboxes -->
-  <fieldset class="mb-3">
-    <legend class="col-form-label">Which service or services are you interested in?</legend>
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="service1"
-        name="services[]"
-        value="Digital coaching and training">
-      <label class="form-check-label" for="service1">
+  <!-- Form -->
+  <form
+    action="https://formspree.io/f/mnndyrnw"
+    method="POST"
+    novalidate>
+    <!-- honeypot -->
+    <input type="text" name="_gotcha" style="display:none!important" tabindex="-1">
+
+    <div class="form-group">
+      <label for="name">Name *</label>
+      <input id="name" name="name" type="text" required placeholder="Jane Smith">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address *</label>
+      <input id="email" name="_replyto" type="email" required placeholder="email@website.com">
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone number *</label>
+      <input id="phone" name="phone" type="tel" required placeholder="555-555-5555">
+    </div>
+
+    <div class="checkbox-group">
+      <label>
+        <input type="checkbox" name="services[]" value="Digital coaching and training">
         Digital coaching and training
       </label>
-    </div>
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="service2"
-        name="services[]"
-        value="Consulting services">
-      <label class="form-check-label" for="service2">
+      <label>
+        <input type="checkbox" name="services[]" value="Consulting services">
         Consulting services
       </label>
-    </div>
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="service3"
-        name="services[]"
-        value="Executive role support">
-      <label class="form-check-label" for="service3">
+      <label>
+        <input type="checkbox" name="services[]" value="Executive role support">
         Executive role support
       </label>
     </div>
-    <div id="servicesFeedback" class="invalid-feedback">
-      Please select at least one service.
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" placeholder="Your message…"></textarea>
     </div>
-  </fieldset>
 
-  <!-- 6) Message -->
-  <div class="mb-3">
-    <label for="message" class="form-label">Message</label>
-    <textarea
-      class="form-control"
-      id="message"
-      name="message"
-      rows="4"
-      placeholder="Your message…"></textarea>
-  </div>
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+</div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-  <div id="formError" class="text-danger mt-3 d-none">
-    Sorry, we were not able to submit the form. Please review the errors and try again.
-  </div>
-</form>
-
-<!-- ─── At the end of your <body>, before </body>, include these scripts ─────── -->
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.1/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-cT...your-integrity-hash..."
-  crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Flatpickr
-    flatpickr("#appointment", {
-      enableTime: true,
-      dateFormat: "Y-m-d H:i",
-      minDate: "today"
-    });
-
-    var form = document.getElementById('appointment-form');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      // Hide previous error
-      document.getElementById('formError').classList.add('d-none');
-
-      // Validate services checkboxes
-      var checked = form.querySelectorAll('input[name="services[]"]:checked');
-      var feedback = document.getElementById('servicesFeedback');
-      if (checked.length === 0) {
-        feedback.style.display = 'block';
-      } else {
-        feedback.style.display = 'none';
-      }
-
-      // Run HTML5 validation + our checkbox check
-      if (!form.checkValidity() || checked.length === 0) {
-        form.classList.add('was-validated');
-        return;
-      }
-
-      // Build FormData and POST to Formspree
-      var data = new FormData(form);
-      fetch('https://formspree.io/f/xpwdendr', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: data
-      })
-      .then(function (response) {
-        if (response.ok) {
-          // Show a simple alert or modal here
-          alert('Thank you! Your appointment request has been submitted.');
-          form.reset();
-          form.classList.remove('was-validated');
-        } else {
-          return response.json().then(function (err) {
-            throw new Error(err.error || 'Form submission failed');
-          });
-        }
-      })
-      .catch(function () {
-        document.getElementById('formError').classList.remove('d-none');
-      });
-    }, false);
-  });
-</script>
-
-    
     <script>
       $(function() {
   var $parent = $('#contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0'),
