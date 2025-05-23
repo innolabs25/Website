@@ -1356,52 +1356,74 @@ $(function () {
   </div>
 
   <!-- 5) Services checkboxes -->
-  <div class="form__group form__group--checkbox">
-    <label
-      class="form__label contact-form__label"
-      for="4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
-      Which service or services are you interested in?
-    </label>
-    <div class="form__checkbox-error"
-         id="checkbox-error-message-4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
-      Please select at least one option.
-    </div>
-    <input
-      type="hidden"
-      name="Which service or services are you interested in?"
-      value="No options selected">
-    <div class="form__input-checkbox-wrapper">
-      <input
-        class="form__input form__input--checkbox"
-        id="0254cf45-fa05-4af3-85b7-d1d5289ff716-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
-        name="Which service or services are you interested in?"
-        type="checkbox"
-        value="Digital coaching and training">
-      <label for="0254cf45-fa05-4af3-85b7-d1d5289ff716-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
-        Digital coaching and training
-      </label>
-    </div>
-    <div class="form__input-checkbox-wrapper">
-      <input
-        class="form__input form__input--checkbox"
-        id="2e168830-593a-4ad8-bac8-20bfde4da6a4-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
-        name="Which service or services are you interested in?"
-        type="checkbox"
-        value="Consulting services">
-      <label for="2e168830-593a-4ad8-bac8-20bfde4da6a4-4c38e346-5982-48a3-bdc8-3fb73a302cd0">Consulting services</label>
-    </div>
-    <div class="form__input-checkbox-wrapper">
-      <input
-        class="form__input form__input--checkbox"
-        id="5a2f36cf-cc48-40e0-b4aa-585fcf8828ff-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
-        name="Which service or services are you interested in?"
-        type="checkbox"
-        value="Executive role support">
-      <label for="5a2f36cf-cc48-40e0-b4aa-585fcf8828ff-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
-        Executive role support
-      </label>
-    </div>
+  <!-- ─── Services Checkbox Group ──────────────────────────────────────────────── -->
+<div class="form__group form__group--checkbox">
+  <label
+    class="form__label contact-form__label"
+    for="4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+    Which service or services are you interested in?
+  </label>
+
+  <div
+    class="form__checkbox-error"
+    id="checkbox-error-message-4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+    Please select at least one option.
   </div>
+
+  <!-- Hidden default value (must have these classes & attributes) -->
+  <input
+    class="form__input form__input--checkbox-default"
+    disabled
+    id="checkbox-default-value-4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+    name="Which service or services are you interested in?"
+    type="hidden"
+    value="No options selected">
+
+  <!-- 1st real checkbox -->
+  <div class="form__input-checkbox-wrapper">
+    <input
+      class="form__input form__input--checkbox"
+      id="0254cf45-fa05-4af3-85b7-d1d5289ff716-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="Which service or services are you interested in?"
+      type="checkbox"
+      value="Digital coaching and training">
+    <label
+      class="form__label contact-form__label form__label--font-normal"
+      for="0254cf45-fa05-4af3-85b7-d1d5289ff716-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Digital coaching and training
+    </label>
+  </div>
+
+  <!-- 2nd real checkbox -->
+  <div class="form__input-checkbox-wrapper">
+    <input
+      class="form__input form__input--checkbox"
+      id="2e168830-593a-4ad8-bac8-20bfde4da6a4-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="Which service or services are you interested in?"
+      type="checkbox"
+      value="Consulting services">
+    <label
+      class="form__label contact-form__label form__label--font-normal"
+      for="2e168830-593a-4ad8-bac8-20bfde4da6a4-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Consulting services
+    </label>
+  </div>
+
+  <!-- 3rd real checkbox -->
+  <div class="form__input-checkbox-wrapper">
+    <input
+      class="form__input form__input--checkbox"
+      id="5a2f36cf-cc48-40e0-b4aa-585fcf8828ff-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+      name="Which service or services are you interested in?"
+      type="checkbox"
+      value="Executive role support">
+    <label
+      class="form__label contact-form__label form__label--font-normal"
+      for="5a2f36cf-cc48-40e0-b4aa-585fcf8828ff-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
+      Executive role support
+    </label>
+  </div>
+</div>
 
   <!-- 6) Message -->
   <div class="form__group">
@@ -1426,17 +1448,22 @@ $(function () {
 
 <!-- ─── Stub reCAPTCHA & Force JSON for Formspree ─────────────────────────────── -->
 <script>
-  // prevent bundle’s grecaptcha calls from failing
+  // 1) Stub out grecaptcha so the bundle won’t fail on reCAPTCHA calls
   window.grecaptcha = window.grecaptcha || { execute: () => Promise.resolve('') };
 
-  // ensure every AJAX to Formspree sends the proper header
+  // 2) Make every jQuery.ajax to Formspree send Accept: application/json
+  //    and _expect_ a JSON response (dataType: 'json')
   if (window.jQuery) {
     jQuery.ajaxSetup({
       headers: { 'Accept': 'application/json' }
     });
+    jQuery.ajaxPrefilter(function(options) {
+      if (options.url.indexOf('formspree.io') !== -1) {
+        options.dataType = 'json';
+      }
+    });
   }
 </script>
-
 <!-- ─── The original B12 bundle that wires up calendar, validation & modal ────── -->
 <script src="assets/bundle-26df06bbde665912c7803cd668f15047.js"></script>
 
