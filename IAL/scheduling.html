@@ -1165,10 +1165,11 @@ $(function () {
 <form
   id="UL_FORM_5ef74c3c-b4b9-46c5-b4b6-6494542154fa"
   class="form js-form"
-  data-recaptcha-version="1"
+  
   data-sb-type="contact_form"
   data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca"
   data-semantic-tag-blueprint="automated-scheduling-page-form"
+  data-send-type="ajax"
 
   method="POST"
   action="https://formspree.io/f/mnndyrnw">
@@ -1306,6 +1307,17 @@ $(function () {
     }
   });
 </script>
+
+  <script>
+    window.grecaptcha = window.grecaptcha || {
+      execute: () => Promise.resolve('')
+    };
+    if (window.jQuery) {
+      jQuery.ajaxSetup({
+        headers: { 'Accept': 'application/json' }
+      });
+    }
+  </script>
 
 <!-- → leave your existing bundle, which powers the calendar, validation & modal: -->
 <script src="assets/bundle-26df06bbde665912c7803cd668f15047.js"></script>
