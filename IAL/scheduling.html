@@ -1758,22 +1758,26 @@ $(function () {
  -->
 <!-- BOOTSTRAP (layout) -->
 <!-- BOOTSTRAP (layout helper) -->
+<!-- BOOTSTRAP FOR LAYOUT -->
 <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
 <style>
 :root{ --ial-green:#00a64f; --slot-h:32px; --slot-px:12px; font-size:16px;}
-/* form box */
 #meeting-form{max-width:420px;margin:auto;font-family:system-ui,Arial,sans-serif;}
 #meeting-form h2{font-size:1.3rem;font-weight:600;margin-bottom:.75rem;}
-/* calendar wrapper */
 .calendar-box{border:1px solid #d0d0d0;border-radius:4px;padding:1rem;}
-.calendar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
+/* selected date label + month label */
+#selected-label{font-weight:600;margin-bottom:.25rem;}
+#month-label{font-size:.95rem;color:#555;margin-bottom:.75rem;text-align:center;}
+/* weekday buttons */
+.calendar-head{display:flex;justify-content:space-between;align-items:center;}
 .week-btn{display:flex;align-items:center;justify-content:center;
           width:38px;height:38px;border:none;border-radius:50%;background:none;
           font-weight:500;color:#000;line-height:1;}
 .week-btn.selected{background:var(--ial-green);color:#fff;}
-.week-btn:disabled{opacity:.35;}
+.week-btn:disabled{opacity:.4;pointer-events:none;}
+/* slots */
 .slot-title{font-size:.75rem;font-weight:600;margin:.75rem 0 .25rem;}
 .slot-wrap{display:flex;flex-wrap:wrap;gap:.5rem;}
 .slot{height:var(--slot-h);line-height:var(--slot-h);padding:0 var(--slot-px);
@@ -1781,8 +1785,8 @@ $(function () {
       font-size:.82rem;white-space:nowrap;}
 .slot.selected{background:var(--ial-green);color:#fff;}
 #no-avail{color:#777;font-size:.85rem;margin:.5rem 0;}
-/* timezone */
-#tz-select{margin-top:.5rem;font-size:.85rem;}
+/* timezone select */
+#tz-select{margin-top:.75rem;font-size:.85rem;}
 /* submit */
 #meeting-form button[type=submit]{background:var(--ial-green);border:none;color:#fff;
   width:100%;padding:.6rem 0;font-weight:600;}
@@ -1791,31 +1795,36 @@ $(function () {
 <form id="meeting-form" action="https://formspree.io/f/xpwdendr" method="POST" novalidate>
   <h2>We look forward to meeting with you</h2>
 
-  <!-- CALENDAR & TIME -->
   <div class="calendar-box mb-3">
-      <div id="selected-label" class="fw-semibold mb-2"></div>
+    <!-- chosen slot display -->
+    <div id="selected-label"></div>
+    <!-- month name -->
+    <div id="month-label"></div>
 
-      <div class="calendar-head">
-        <button id="prev-week" type="button" aria-label="Previous week" class="btn p-0">&lsaquo;</button>
-        <div id="weekdays" class="d-flex gap-1"></div>
-        <button id="next-week" type="button" aria-label="Next week" class="btn p-0">&rsaquo;</button>
-      </div>
+    <!-- arrows + weekdays -->
+    <div class="calendar-head mb-2">
+      <button id="prev-week" type="button" aria-label="Prev week" class="btn p-0">&lsaquo;</button>
+      <div id="weekdays" class="d-flex gap-1"></div>
+      <button id="next-week" type="button" aria-label="Next week" class="btn p-0">&rsaquo;</button>
+    </div>
 
-      <div id="slots-area">
-        <div class="slot-title">Morning</div>
-        <div id="morning-wrap" class="slot-wrap mb-1"></div>
+    <!-- slots -->
+    <div>
+      <div class="slot-title">Morning</div>
+      <div id="morning-wrap" class="slot-wrap mb-1"></div>
 
-        <div class="slot-title">Afternoon</div>
-        <div id="afternoon-wrap" class="slot-wrap mb-1"></div>
+      <div class="slot-title">Afternoon</div>
+      <div id="afternoon-wrap" class="slot-wrap mb-1"></div>
 
-        <div id="no-avail" class="d-none">No availability, try another day</div>
-      </div>
+      <div id="no-avail" class="d-none">No availability, try another day</div>
+    </div>
 
-      <select id="tz-select" class="form-select form-select-sm"></select>
-      <input type="hidden" name="appointment_iso" id="appointment_iso">
+    <!-- timezone selector -->
+    <select id="tz-select" class="form-select form-select-sm"></select>
+    <input type="hidden" name="appointment_iso" id="appointment_iso">
   </div>
 
-  <!-- CONTACT DETAILS -->
+  <!-- Contact fields -->
   <div class="mb-3">
     <label class="form-label">Name *</label>
     <input name="name" type="text" class="form-control" required>
@@ -1856,126 +1865,137 @@ $(function () {
   <button type="submit">SUBMIT</button>
 </form>
 
-<!-- DAYJS + TIME-ZONE PLUG-INS -->
+<!-- DAYJS + TZ PLUGINS -->
 <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.11.10/plugin/utc.js"></script>
 <script src="https://unpkg.com/dayjs@1.11.10/plugin/timezone.js"></script>
 
 <script>
-/* ---------- INIT DAYJS ---------- */
+/*— INIT DAYJS —*/
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
-/* ---------- DOM SHORTCUTS ---------- */
-const labelEl     = document.getElementById('selected-label');
-const weekdaysEl  = document.getElementById('weekdays');
-const mornWrap    = document.getElementById('morning-wrap');
-const aftWrap     = document.getElementById('afternoon-wrap');
-const noAvailEl   = document.getElementById('no-avail');
-const tzSelect    = document.getElementById('tz-select');
-const isoHidden   = document.getElementById('appointment_iso');
-const form        = document.getElementById('meeting-form');
+/*— DOM —*/
+const monthLabelEl   = document.getElementById('month-label');
+const selectedLabel  = document.getElementById('selected-label');
+const weekdaysEl     = document.getElementById('weekdays');
+const mornWrap       = document.getElementById('morning-wrap');
+const aftWrap        = document.getElementById('afternoon-wrap');
+const noAvailEl      = document.getElementById('no-avail');
+const tzSelect       = document.getElementById('tz-select');
+const isoHidden      = document.getElementById('appointment_iso');
+const form           = document.getElementById('meeting-form');
 
-/* ---------- CONSTANTS ---------- */
-const MORNING  = ['09:00','09:30','10:00','10:30','11:00','11:30'];
-const AFTERNOON= ['12:00','12:30','13:00','13:30','14:00','14:30',
-                  '15:00','15:30','16:00','16:30'];
+/*— CONSTANTS —*/
+const MORNING   = ['09:00','09:30','10:00','10:30','11:00','11:30'];
+const AFTERNOON = ['12:00','12:30','13:00','13:30','14:00','14:30',
+                   '15:00','15:30','16:00','16:30'];
 
-/* ---------- STATE ---------- */
+/*— STATE —*/
 let tz           = dayjs.tz.guess();
 let selectedDate = dayjs().startOf('day');
 let weekStart    = isoWeekStart(selectedDate);
 let selectedSlot = null;
 
-/* ---------- HELPERS ---------- */
+/*— HELPERS —*/
 function isoWeekStart(d){ return d.day()===0 ? d.subtract(6,'d') : d.day(1); }
-
-function formatRange(start){
-  const [h,m]=start.split(':').map(Number);
-  const s = dayjs().hour(h).minute(m),
-        e = s.add(30,'m');
+function formatRange(t){
+  const [h,m]=t.split(':').map(Number);
+  const s=dayjs().hour(h).minute(m), e=s.add(30,'m');
   return s.format('h:mm A')+' – '+e.format('h:mm A');
 }
+function buildBtn(txt,cn=''){ const b=document.createElement('button');
+  b.type='button'; b.textContent=txt; b.className=cn; return b; }
 
-function buildBtn(txt,cls=''){const b=document.createElement('button');
-  b.type='button';b.textContent=txt;b.className=cls;return b;}
+/*— RENDER MONTH —*/
+function updateMonthLabel(){
+  monthLabelEl.textContent = selectedDate.format('MMMM YYYY');
+}
 
-/* ---------- WEEK-DAY ROW ---------- */
+/*— RENDER WEEKDAYS —*/
 function renderWeek(){
-  weekdaysEl.innerHTML='';
+  updateMonthLabel();
+  weekdaysEl.innerHTML = '';
   for(let i=0;i<7;i++){
-    const day=weekStart.add(i,'d');
-    const btn=buildBtn(day.date(),'week-btn');
-    if(day.isSame(selectedDate,'day'))btn.classList.add('selected');
-    if(day.isBefore(dayjs(),'day'))btn.disabled=true;
-    btn.onclick=()=>{if(btn.disabled)return;
-      selectedDate=day;selectedSlot=null;
-      labelEl.textContent='';isoHidden.value='';
-      renderWeek();renderSlots();};
+    const d = weekStart.add(i,'d');
+    const btn = buildBtn(d.date(),'week-btn');
+    if(d.isSame(selectedDate,'day')) btn.classList.add('selected');
+    if(d.isBefore(dayjs(),'day'))    btn.disabled = true;
+    btn.onclick = ()=>{
+      if(btn.disabled) return;
+      selectedDate = d; selectedSlot = null;
+      selectedLabel.textContent=''; isoHidden.value='';
+      renderWeek(); renderSlots();
+    };
     weekdaysEl.appendChild(btn);
   }
 }
-document.getElementById('prev-week').onclick=()=>{
-  weekStart=weekStart.subtract(7,'d');renderWeek();renderSlots();};
-document.getElementById('next-week').onclick=()=>{
-  weekStart=weekStart.add(7,'d');renderWeek();renderSlots();};
+document.getElementById('prev-week').onclick = ()=>{
+  weekStart = weekStart.subtract(7,'d');
+  renderWeek(); renderSlots();
+};
+document.getElementById('next-week').onclick = ()=>{
+  weekStart = weekStart.add(7,'d');
+  renderWeek(); renderSlots();
+};
 
-/* ---------- TIME-SLOTS ---------- */
+/*— RENDER SLOTS —*/
 function renderSlots(){
-  mornWrap.innerHTML='';aftWrap.innerHTML='';
-  const weekend=[0,6].includes(selectedDate.day());
-  noAvailEl.classList.toggle('d-none',!weekend);
-  mornWrap.parentElement.style.display=weekend?'none':'block';
-  aftWrap.parentElement.style.display =weekend?'none':'block';
-  if(weekend)return;
-  MORNING.forEach(t=>addSlot(t,mornWrap));
-  AFTERNOON.forEach(t=>addSlot(t,aftWrap));
+  mornWrap.innerHTML=''; aftWrap.innerHTML='';
+  const isWeekend = [0,6].includes(selectedDate.day());
+  noAvailEl.classList.toggle('d-none',!isWeekend);
+  mornWrap.parentElement.style.display = isWeekend?'none':'block';
+  aftWrap.parentElement.style.display  = isWeekend?'none':'block';
+  if(isWeekend) return;
+  MORNING.forEach(t=>makeSlot(t,mornWrap));
+  AFTERNOON.forEach(t=>makeSlot(t,aftWrap));
 }
-function addSlot(time24,wrap){
-  const btn=buildBtn(formatRange(time24),'slot');
-  btn.dataset.time=time24;
-  btn.onclick=()=>selectSlot(btn);
+function makeSlot(t,wrap){
+  const btn=buildBtn(formatRange(t),'slot');
+  btn.dataset.time = t;
+  btn.onclick = ()=>pickSlot(btn);
   wrap.appendChild(btn);
 }
-function selectSlot(btn){
-  document.querySelectorAll('.slot').forEach(b=>b.classList.remove('selected'));
+function pickSlot(btn){
+  document.querySelectorAll('.slot').forEach(x=>x.classList.remove('selected'));
   btn.classList.add('selected');
-  selectedSlot=btn.dataset.time;
-  const dt=dayjs.tz(`${selectedDate.format('YYYY-MM-DD')} ${selectedSlot}`,tz);
-  isoHidden.value=dt.format();
-  labelEl.textContent=dt.format('dddd, MMMM D, YYYY • h:mm A');
+  selectedSlot = btn.dataset.time;
+  const dt = dayjs.tz(
+    `${selectedDate.format('YYYY-MM-DD')} ${selectedSlot}`, tz
+  );
+  isoHidden.value = dt.format();
+  selectedLabel.textContent = dt.format('dddd, MMMM D, YYYY • h:mm A');
 }
 
-/* ---------- TIME-ZONE DROP-DOWN ---------- */
+/*— POPULATE TIMEZONES —*/
 function populateTz(){
-  const ph=document.createElement('option');
-  ph.disabled=true;ph.value='';ph.text='Select time zone';
-  tzSelect.appendChild(ph);
-
   dayjs.tz.names().forEach(z=>{
-    const o=document.createElement('option');
-    o.value=z;
-    o.text=`(GMT${dayjs().tz(z).format('Z')}) ${z.replace(/_/g,' ').replace('/',' – ')}`;
+    const o = document.createElement('option');
+    o.value = z;
+    o.text  = `(GMT${dayjs().tz(z).format('Z')}) ${z.replace(/_/g,' ').replace('/',' – ')}`;
     tzSelect.appendChild(o);
   });
-  if(tzSelect.querySelector(`option[value="${tz}"]`))tzSelect.value=tz;
-  tzSelect.onchange=()=>{
-    if(!tzSelect.value)return;
-    tz=tzSelect.value;
-    if(selectedSlot)selectSlot(document.querySelector('.slot.selected'));
+  if(tzSelect.querySelector(`option[value="${tz}"]`)) {
+    tzSelect.value = tz;
+  }
+  tzSelect.onchange = ()=>{
+    tz = tzSelect.value;
+    if(selectedSlot) pickSlot(document.querySelector('.slot.selected'));
   };
 }
 
-/* ---------- VALIDATION ---------- */
+/*— FORM GUARD —*/
 form.addEventListener('submit',e=>{
-  if(!isoHidden.value){e.preventDefault();
-    alert('Please choose a date & time first.');}
+  if(!isoHidden.value){
+    e.preventDefault();
+    alert('Please choose a date & time first.');
+  }
 });
 
-/* ---------- BOOT-UP ---------- */
+/*— BOOTSTRAP THE UI —*/
 populateTz();
-renderWeek();                // paint weekdays
-requestAnimationFrame(renderSlots);  // paint slots next frame
+renderWeek();
+requestAnimationFrame(renderSlots);
 </script>
 
 </div>
