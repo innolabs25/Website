@@ -2038,12 +2038,17 @@ document.addEventListener('DOMContentLoaded', function(){
     body { padding:2rem; font-family:system-ui,Arial,sans-serif; }
     h2 { margin-bottom:1rem; }
     .flatpickr-calendar { border:1px solid #d0d0d0 !important; }
+    .flatpickr-calendar.inline {
+    display: block;
+    margin: 0 auto !important;
+    max-width: 320px; /* optional */
+  }
   </style>
 </head>
 <body>
 
   <form action="https://formspree.io/f/xpwdendr" method="POST" novalidate>
-<!--     <h2>We look forward to meeting with you</h2> -->
+
 
     <!-- 1) FLATPICKR INLINE DATE+TIME PICKER -->
     <div class="mb-3">
