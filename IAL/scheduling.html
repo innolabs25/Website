@@ -1159,321 +1159,181 @@ $(function () {
     
     
     <button class="sb-button sb-button--form contact-form__btn" data-component-field="form_details" data-sb-field="button_label" data-sb-is-link="" data-sb-type="text" data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca" type="submit">Submit</button>
-</form> -->
+</form>  -->
 
-<!-- … somewhere in your body, replace your old <form> with this exact block … -->
-<!-- ─── Your FormSpree-powered Form ───────────────────────────────────────────── -->
-<!-- ─── In your <head> section, include Bootstrap CSS and Flatpickr CSS ───────── -->
-<!-- <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.1/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-+cf...your-integrity-hash..."
-  crossorigin="anonymous">
-<link
-  href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-  rel="stylesheet">
- -->
-<!-- ─── Replace your existing <form> … </form> with this block ─────────────────── -->
+<form
+  action="https://formspree.io/f/xpwdendr"
+  method="POST"
+  class="form js-form"
+  id="automated-scheduling-form"
+>
+  <!-- Select a date and time -->
+  <div class="form__group form__group--required">
+    <label for="booking" class="form__label">
+      Select a date and time <span class="form__label-required">*</span>
+    </label>
+    <!-- hidden field that your calendar widget will populate -->
+    <input name="appointment_start_at" type="hidden" value="">
 
-
-  <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.1/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-+cf...your-integrity-hash..."
-    crossorigin="anonymous">
-
-  <!-- Flatpickr CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    rel="stylesheet">
-
-  <style>
-    /* Optional: make the active slot stand out */
-    #slots-container .btn.active {
-      background-color: #198754;
-      color: #fff;
-    }
-  </style>
-
-<body>
-  <div class="container py-5">
-    <h1 class="mb-4 text-center">Meeting Request Form</h1>
-
-    <form id="appointment-form" novalidate>
-      <!-- 1) Date picker (weekdays only) -->
-      <div class="mb-3">
-        <label for="appointment-date" class="form-label">Select date</label>
-        <input 
-          type="text" 
-          id="appointment-date"
-          class="form-control" 
-          placeholder="Click to pick a date"
-          required>
-        <div class="invalid-feedback">Please choose a weekday.</div>
-      </div>
-
-      <!-- 2) Timezone select -->
-      <div class="mb-3">
-        <label for="timezone-select" class="form-label">Timezone</label>
-        <select id="timezone-select" class="form-select" required>
-          <option value="">Loading…</option>
-        </select>
-        <div class="invalid-feedback">Please choose a timezone.</div>
-      </div>
-
-      <!-- 3) Time slots -->
-      <div class="mb-3">
-        <label class="form-label">Available time slots</label>
-        <div id="slots-container" class="row g-2"></div>
-        <div id="slot-feedback" class="invalid-feedback d-block" style="display:none">
-          Please select a time slot.
+    <div class="js-prevent-preview-frame-click">
+      <!-- ——— your existing calendar widget markup ——— -->
+      <div class="sb-bookings-appointment__wrapper sb-bookings-appointment--inline">
+        <div class="appointment-calendar__selected-date-wrapper">
+          <span class="appointment-calendar__selected-date"></span>
+          <span class="appointment-calendar__selected-date-error">Select a date and time</span>
         </div>
-        <!-- hidden to capture the chosen slot -->
-        <input type="hidden" name="selected_slot" id="selected-slot" required>
-      </div>
-
-      <!-- 4) Name -->
-      <div class="mb-3">
-        <label for="name" class="form-label">Name *</label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
-          class="form-control" 
-          placeholder="Jane Smith" 
-          required>
-        <div class="invalid-feedback">Please enter your name.</div>
-      </div>
-
-      <!-- 5) Email (_replyto for Formspree) -->
-      <div class="mb-3">
-        <label for="email" class="form-label">Email address *</label>
-        <input 
-          type="email" 
-          id="email" 
-          name="_replyto" 
-          class="form-control" 
-          placeholder="email@website.com" 
-          required>
-        <div class="invalid-feedback">Please enter a valid email.</div>
-      </div>
-
-      <!-- 6) Phone -->
-      <div class="mb-3">
-        <label for="phone" class="form-label">Phone number *</label>
-        <input 
-          type="tel" 
-          id="phone" 
-          name="phone" 
-          class="form-control" 
-          placeholder="555-555-5555" 
-          required>
-        <div class="invalid-feedback">Please enter your phone number.</div>
-      </div>
-
-      <!-- 7) Services checkboxes -->
-      <fieldset class="mb-3">
-        <legend class="form-label">Which service(s) are you interested in?</legend>
-        <div class="form-check">
-          <input 
-            class="form-check-input" 
-            type="checkbox" 
-            id="svc1" 
-            name="services[]" 
-            value="Digital coaching and training">
-          <label class="form-check-label" for="svc1">
-            Digital coaching and training
-          </label>
+        <div class="appointment-calendar">
+          <div class="appointment-calendar__date">
+            <button aria-label="Previous month" class="appointment-calendar__date-btn appointment-calendar__date-btn--prev" type="button">
+              <!-- SVG… -->
+            </button>
+            <button aria-label="Next month" class="appointment-calendar__date-btn appointment-calendar__date-btn--next" type="button">
+              <!-- SVG… -->
+            </button>
+            <div aria-label="Current month" class="appointment-calendar__date-date">
+              September <span class="appointment-calendar__date-date-month">2018</span>
+            </div>
+          </div>
+          <div class="appointment-calendar__weekdays">
+            <!-- …Mon–Sun buttons (same as your snippet)… -->
+          </div>
+          <div class="appointment-calendar__day">
+            <!-- morning / afternoon / evening slots, etc. -->
+          </div>
+          <div class="appointment-calendar__day-empty">
+            <!-- “No availability” graphic/text -->
+          </div>
         </div>
-        <div class="form-check">
-          <input 
-            class="form-check-input" 
-            type="checkbox" 
-            id="svc2" 
-            name="services[]" 
-            value="Consulting services">
-          <label class="form-check-label" for="svc2">
-            Consulting services
-          </label>
+        <div class="appointment-calendar__timezone">
+          <!-- timezone toggle + dropdown -->
         </div>
-        <div class="form-check">
-          <input 
-            class="form-check-input" 
-            type="checkbox" 
-            id="svc3" 
-            name="services[]" 
-            value="Executive role support">
-          <label class="form-check-label" for="svc3">
-            Executive role support
-          </label>
-        </div>
-        <div id="servicesFeedback" class="invalid-feedback">
-          Please select at least one service.
-        </div>
-      </fieldset>
-
-      <!-- 8) Message -->
-      <div class="mb-3">
-        <label for="message" class="form-label">Message</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          class="form-control" 
-          rows="4" 
-          placeholder="Your message…"></textarea>
       </div>
+      <!-- ———————————————————————————————— -->
+    </div>
 
-      <!-- Honeypot to reduce spam -->
-      <input type="text" name="_gotcha" style="display:none!important" tabindex="-1">
-
-      <button type="submit" class="btn btn-success w-100">Submit</button>
-    </form>
+    <!-- the hidden “booking” field your placeholder script reads/writes -->
+    <input
+      required
+      id="booking"
+      name="booking"
+      type="hidden"
+      class="form__input contact-form__input js-booking-placeholder"
+      placeholder="Select a date and time..."
+      value=""
+    />
   </div>
 
-  <!-- Success Modal -->
-  <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <h5 class="mb-3">Thank you!</h5>
-          <p>Your appointment request has been submitted. We’ll be in touch shortly.</p>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
+  <!-- Name -->
+  <div class="form__group form__group--required">
+    <label for="name" class="form__label">
+      Name <span class="form__label-required">*</span>
+    </label>
+    <input
+      required
+      id="name"
+      name="name"
+      type="text"
+      placeholder="Jane Smith"
+      class="form__input contact-form__input"
+      value=""
+    />
+  </div>
+
+  <!-- Email -->
+  <div class="form__group form__group--required">
+    <label for="email" class="form__label">
+      Email address <span class="form__label-required">*</span>
+    </label>
+    <input
+      required
+      id="email"
+      name="email"
+      type="email"
+      placeholder="email@website.com"
+      class="form__input contact-form__input"
+      value=""
+    />
+  </div>
+
+  <!-- Phone -->
+  <div class="form__group form__group--required">
+    <label for="phone" class="form__label">
+      Phone number <span class="form__label-required">*</span>
+    </label>
+    <input
+      required
+      id="phone"
+      name="phone"
+      type="tel"
+      placeholder="555-555-5555"
+      class="form__input contact-form__input"
+      value=""
+    />
+  </div>
+
+  <!-- Services checkboxes -->
+  <div class="form__group form__group--checkbox">
+    <label class="form__label">Which service or services are you interested in?</label>
+    <div class="form__checkbox-error" id="checkbox-error-message">
+      Please select at least one option.
+    </div>
+
+    <div class="form__input-checkbox-wrapper">
+      <input
+        id="service_digital_coaching"
+        name="services[]"
+        type="checkbox"
+        value="Digital coaching and training"
+        class="form__input form__input--checkbox"
+      />
+      <label for="service_digital_coaching" class="form__label form__label--font-normal">
+        Digital coaching and training
+      </label>
+    </div>
+    <div class="form__input-checkbox-wrapper">
+      <input
+        id="service_consulting"
+        name="services[]"
+        type="checkbox"
+        value="Consulting services"
+        class="form__input form__input--checkbox"
+      />
+      <label for="service_consulting" class="form__label form__label--font-normal">
+        Consulting services
+      </label>
+    </div>
+    <div class="form__input-checkbox-wrapper">
+      <input
+        id="service_exec_support"
+        name="services[]"
+        type="checkbox"
+        value="Executive role support"
+        class="form__input form__input--checkbox"
+      />
+      <label for="service_exec_support" class="form__label form__label--font-normal">
+        Executive role support
+      </label>
     </div>
   </div>
 
-  <!-- Bootstrap JS Bundle -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-cT...your-integrity-hash..."
-    crossorigin="anonymous"></script>
-  <!-- Flatpickr JS -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <!-- Message -->
+  <div class="form__group">
+    <label for="message" class="form__label">Message</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="4"
+      class="form__input form__input--textarea contact-form__textarea"
+    ></textarea>
+  </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Populate timezones
-      var tzSelect = document.getElementById('timezone-select');
-      tzSelect.innerHTML = '<option value="">Select timezone</option>';
-      var zones = Intl.supportedValuesOf
-        ? Intl.supportedValuesOf('timeZone')
-        : ['Asia/Kolkata','UTC'];
-      zones.forEach(function(tz){
-        var opt = document.createElement('option');
-        opt.value = tz; opt.textContent = tz;
-        tzSelect.append(opt);
-      });
+  <!-- (optional) customize email subject -->
+  <input type="hidden" name="_subject" value="New scheduling request from website" />
 
-      // Initialize date picker (disable weekends)
-      flatpickr("#appointment-date", {
-        dateFormat: "Y-m-d",
-        minDate: "today",
-        disable: [
-          function(date){ return (date.getDay() === 0 || date.getDay() === 6); }
-        ],
-        onChange: function(selectedDates){
-          generateSlots();
-        }
-      });
-
-      var slotsContainer = document.getElementById('slots-container');
-      var selectedSlot = document.getElementById('selected-slot');
-
-      function generateSlots() {
-        slotsContainer.innerHTML = '';
-        selectedSlot.value = '';
-        var startHour = 9, endHour = 17;
-        for (var h = startHour; h < endHour; h++) {
-          ['00','30'].forEach(function(min){
-            var timeLabel = h + ':' + min;
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'btn btn-outline-secondary';
-            btn.style.width='100%';
-            btn.textContent = formatTime(h, min);
-            btn.addEventListener('click', function(){
-              // clear active
-              slotsContainer.querySelectorAll('.btn').forEach(function(b){
-                b.classList.remove('active');
-              });
-              this.classList.add('active');
-              selectedSlot.value = this.textContent;
-            });
-            var col = document.createElement('div');
-            col.className = 'col-6';
-            col.appendChild(btn);
-            slotsContainer.appendChild(col);
-          });
-        }
-      }
-
-      function formatTime(hour, min) {
-        var h = hour % 12 === 0 ? 12 : hour % 12;
-        var ampm = hour < 12 ? 'am' : 'pm';
-        return h + ':' + min + ' ' + ampm;
-      }
-
-      // generate initial slots for today if weekday
-      generateSlots();
-
-      // Form submit handler
-      var form = document.getElementById('appointment-form');
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-
-        // hide any prior validation UI
-        form.classList.remove('was-validated');
-        document.getElementById('slot-feedback').style.display = 'none';
-        document.getElementById('servicesFeedback').style.display = 'none';
-
-        // custom validations
-        var valid = true;
-        if (!form.checkValidity()) valid = false;
-        if (!selectedSlot.value) {
-          document.getElementById('slot-feedback').style.display = 'block';
-          valid = false;
-        }
-        if (form.querySelectorAll('input[name="services[]"]:checked').length === 0) {
-          document.getElementById('servicesFeedback').style.display = 'block';
-          valid = false;
-        }
-
-        if (!valid) {
-          form.classList.add('was-validated');
-          return;
-        }
-
-        // Assemble FormData
-        var fd = new FormData(form);
-        // add date & timezone
-        fd.set('appointment_date', document.getElementById('appointment-date').value);
-        fd.set('timezone', tzSelect.value);
-
-        // POST to Formspree
-        fetch('https://formspree.io/f/mnndyrnw', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: fd
-        })
-        .then(function(resp){
-          if (resp.ok) {
-            new bootstrap.Modal(document.getElementById('successModal')).show();
-            form.reset();
-            generateSlots();
-          } else {
-            throw new Error('Network response was not OK');
-          }
-        })
-        .catch(function(){
-          alert('Sorry, we couldn’t submit. Please try again.');
-        });
-      });
-    });
-  </script>
-
+  <button type="submit" class="sb-button sb-button--form contact-form__btn">
+    Submit
+  </button>
+</form>
 
     <script>
       $(function() {
