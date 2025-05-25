@@ -1850,19 +1850,21 @@ $(function () {
   <button type="submit">SUBMIT</button>
 </form>
 
-<!-- DAYJS + TIMEZONE -->
+<!-- DAYJS + TIME-ZONE PLUG-INS (leave these exactly as-is) -->
 <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.11.10/plugin/utc.js"></script>
 <script src="https://unpkg.com/dayjs@1.11.10/plugin/timezone.js"></script>
+
 <script>
+/* ---------------------------------------------------------
+   INITIALISE DAYJS
+---------------------------------------------------------- */
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
-/* ---------- CONFIG ---------- */
-const MORNING = ['09:00','09:30','10:00','10:30','11:00','11:30'];
-const AFTERNOON = ['12:00','12:30','13:00','13:30','14:00','14:30',
-                   '15:00','15:30','16:00','16:30'];
-/* ---------- DOM ---------- */
+/* ---------------------------------------------------------
+   DOM SHORT-CUTS
+---------------------------------------------------------- */
 const labelEl     = document.getElementById('selected-label');
 const weekdaysEl  = document.getElementById('weekdays');
 const mornWrap    = document.getElementById('morning-wrap');
@@ -1871,103 +1873,120 @@ const noAvailEl   = document.getElementById('no-avail');
 const tzSelect    = document.getElementById('tz-select');
 const isoHidden   = document.getElementById('appointment_iso');
 const form        = document.getElementById('meeting-form');
-/* ---------- STATE ---------- */
-let selectedDate  = dayjs();                    // dayjs object (date portion only)
-let weekStart     = startOfISOWeek(selectedDate);
-let selectedSlot  = null;                       // "HH:mm" string
-let tz            = dayjs.tz.guess();           // timezone string
-/* ---------- INIT ---------- */
-populateTimezones();
-renderWeek();
-renderSlots();
-/* ---------- FUNCTIONS ---------- */
-// Monday of ISO-week
-function startOfISOWeek(d){ return d.day()===0?d.subtract(6,'d'):d.startOf('week').add(1,'d'); }
-// Build weekday buttons (Mon–Sun)
+
+/* ---------------------------------------------------------
+   CONSTANTS
+---------------------------------------------------------- */
+const MORNING  = ['09:00','09:30','10:00','10:30','11:00','11:30'];
+const AFTERNOON= ['12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'];
+
+/* ---------------------------------------------------------
+   STATE
+---------------------------------------------------------- */
+let tz           = dayjs.tz.guess();        // user time-zone
+let selectedDate = dayjs().startOf('day');  // today
+let weekStart    = isoWeekStart(selectedDate);
+let selectedSlot = null;                    // "HH:mm" string
+
+/* ---------------------------------------------------------
+   HELPERS
+---------------------------------------------------------- */
+function isoWeekStart(d){ return d.day()===0 ? d.subtract(6,'d') : d.day(1); }
+
+function formatRange(start){
+  const [h,m]=start.split(':').map(Number);
+  const s = dayjs().hour(h).minute(m),
+        e = s.add(30,'m');
+  return s.format('h:mm A') + ' – ' + e.format('h:mm A');
+}
+
+function buildBtn(text,className=''){ const b=document.createElement('button'); b.type='button'; b.textContent=text; b.className=className; return b; }
+
+/* ---------------------------------------------------------
+   RENDER WEEK-DAY BUTTONS
+---------------------------------------------------------- */
 function renderWeek(){
   weekdaysEl.innerHTML='';
   for(let i=0;i<7;i++){
     const day = weekStart.add(i,'d');
-    const btn = document.createElement('button');
-    btn.type='button'; btn.className='week-btn';
-    btn.textContent=day.date();
+    const btn = buildBtn(day.date(),'week-btn');
     if(day.isSame(selectedDate,'day')) btn.classList.add('selected');
-    if(day.isBefore(dayjs(),'day'))   btn.classList.add('disabled');
-    btn.onclick=()=>{
-      if(btn.classList.contains('disabled')) return;
-      selectedDate = day;
-      selectedSlot = null;
-      labelEl.textContent='';
-      isoHidden.value='';
-      renderWeek();                   // re-highlight the row
-      renderSlots();                  // regenerate slot buttons
-    };
+    if(day.isBefore(dayjs(),'day'))     btn.disabled=true;
+    btn.onclick=()=>{ if(btn.disabled) return;
+                      selectedDate=day; selectedSlot=null;
+                      labelEl.textContent=''; isoHidden.value='';
+                      renderWeek(); renderSlots(); };
     weekdaysEl.appendChild(btn);
   }
-  document.getElementById('prev-week').onclick=()=>{
-    weekStart = weekStart.subtract(7,'d');
-    renderWeek(); renderSlots();
-  };
-  document.getElementById('next-week').onclick=()=>{
-    weekStart = weekStart.add(7,'d');
-    renderWeek(); renderSlots();
-  };
 }
-// Build time-slot buttons
+
+document.getElementById('prev-week').onclick=()=>{
+  weekStart=weekStart.subtract(7,'d'); renderWeek(); renderSlots(); };
+document.getElementById('next-week').onclick=()=>{
+  weekStart=weekStart.add(7,'d');      renderWeek(); renderSlots(); };
+
+/* ---------------------------------------------------------
+   RENDER TIME-SLOTS
+---------------------------------------------------------- */
 function renderSlots(){
   mornWrap.innerHTML=''; aftWrap.innerHTML='';
-  const isWeekend = [0,6].includes(selectedDate.day());
-  noAvailEl.classList.toggle('d-none',!isWeekend);
-  mornWrap.parentElement.style.display=isWeekend?'none':'block';
-  aftWrap.parentElement.style.display =isWeekend?'none':'block';
-  if(isWeekend) return;
+  const weekend=[0,6].includes(selectedDate.day());
+  noAvailEl.classList.toggle('d-none',!weekend);
+  mornWrap.parentElement.style.display = weekend?'none':'block';
+  aftWrap.parentElement.style.display  = weekend?'none':'block';
+  if(weekend) return;
 
-  MORNING.forEach(t=>addSlotBtn(t,mornWrap));
-  AFTERNOON.forEach(t=>addSlotBtn(t,aftWrap));
+  MORNING.forEach(t=>slotBtn(t,mornWrap));
+  AFTERNOON.forEach(t=>slotBtn(t,aftWrap));
 }
-function addSlotBtn(time24,wrap){
-  const btn=document.createElement('button');
-  btn.type='button'; btn.className='slot btn-sm slot';
-  btn.textContent=formatRange(time24);
+
+function slotBtn(time24,wrap){
+  const btn = buildBtn(formatRange(time24),'slot');
   btn.dataset.time=time24;
-  btn.onclick=()=>selectSlot(btn);
+  btn.onclick=()=>pickSlot(btn);
   wrap.appendChild(btn);
 }
-function selectSlot(btn){
+
+function pickSlot(btn){
   document.querySelectorAll('.slot').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
   selectedSlot = btn.dataset.time;
-  const dt = dayjs.tz(
-      selectedDate.format('YYYY-MM-DD')+' '+selectedSlot, tz)
-  isoHidden.value = dt.format();   // ISO string w/ offset
-  labelEl.textContent = dt.format('dddd, MMMM D, YYYY [at] h:mm A');
+  const dt = dayjs.tz(`${selectedDate.format('YYYY-MM-DD')} ${selectedSlot}`,tz);
+  isoHidden.value = dt.format();                       // ISO w/ offset
+  labelEl.textContent = dt.format('dddd, MMMM D, YYYY • h:mm A');
 }
-/* Human-readable label for button */
-function formatRange(start){
-  const [h,m]=start.split(':').map(Number);
-  const startObj=dayjs().hour(h).minute(m);
-  const endObj  =startObj.add(30,'m');
-  return startObj.format('h:mm A')+' – '+endObj.format('h:mm A');
-}
-/* Timezone dropdown */
-function populateTimezones(){
+
+/* ---------------------------------------------------------
+   TIME-ZONE DROP-DOWN
+---------------------------------------------------------- */
+function populateTz(){
   dayjs.tz.names().forEach(z=>{
-     const opt=document.createElement('option');
-     opt.value=z;
-     opt.textContent=`(GMT${dayjs().tz(z).format('Z')}) ${z.replace(/_/g,' ').replace('/',' – ')}`;
-     tzSelect.appendChild(opt);
+    const o=document.createElement('option');
+    o.value=z;
+    o.textContent=`(GMT${dayjs().tz(z).format('Z')}) ${z.replace(/_/g,' ').replace('/',' – ')}`;
+    tzSelect.appendChild(o);
   });
   tzSelect.value=tz;
-  tzSelect.onchange=()=>{tz=tzSelect.value;if(selectedSlot){selectSlot(document.querySelector('.slot.selected'));}};
+  tzSelect.onchange=()=>{ tz=tzSelect.value;
+                          if(selectedSlot) pickSlot(document.querySelector('.slot.selected')); };
 }
-/* Simple client-side guard  */
+
+/* ---------------------------------------------------------
+   SIMPLE CLIENT-SIDE GUARD
+---------------------------------------------------------- */
 form.addEventListener('submit',e=>{
-  if(!isoHidden.value){
-    e.preventDefault();
-    alert('Please choose a date & time first.');
-  }
+  if(!isoHidden.value){ e.preventDefault();
+    alert('Please choose a date & time first.'); }
 });
+
+/* ---------------------------------------------------------
+   INITIALISE UI
+---------------------------------------------------------- */
+populateTz();
+renderWeek();
+renderSlots();
 </script>
+
 
 </div>
 
