@@ -1160,712 +1160,563 @@ $(function () {
     
     <button class="sb-button sb-button--form contact-form__btn" data-component-field="form_details" data-sb-field="button_label" data-sb-is-link="" data-sb-type="text" data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca" type="submit">Submit</button>
 </form>  -->
-<div id="contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
   <form
+    id="UL_FORM_5ef74c3c-b4b9-46c5-b4b6-6494542154fa"
     class="form js-form"
-    data-recaptcha-version="1"
-    data-sb-type="contact_form"
-    data-send-type="ajax"
-    id="UL_FORM_4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+    action="https://formspree.io/f/xpwdendr"
+    method="POST"
   >
-    <!-- Select a date and time -->
-    <div class="form__group form__group--required">
-      <label
-        for="93eac547-d092-427d-92b3-ed99d6058db8-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
-        class="form__label contact-form__label"
-      >
-        Select a date and time <span class="form__label-required">*</span>
+    <!-- ──────────────────────────────────────────────────────────────────────────── -->
+    <!-- Calendar / date-time picker (unchanged markup)                              -->
+    <!-- ──────────────────────────────────────────────────────────────────────────── -->
+    <div data-is-required="true" class="form__group form__group--required">
+      <label class="form__label contact-form__label" for="booking">
+        Select a date and time
+        <span class="form__label-required" title="This field is required">*</span>
       </label>
+
+      <!-- this hidden field will hold your ISO datetime -->
       <input name="appointment_start_at" type="hidden" value="">
-      <div class="js-prevent-preview-frame-click" skip-data-sb>
-        <div class="sb-bookings-appointment__wrapper sb-bookings-appointment--inline">
-          <div class="appointment-calendar__selected-date-wrapper">
-            <span class="appointment-calendar__selected-date"></span>
-            <span class="appointment-calendar__selected-date-error">
-              Select a date and time
-            </span>
-          </div>
-          <div class="appointment-calendar__date">
-            <button
-              aria-label="Previous month"
-              class="appointment-calendar__date-btn appointment-calendar__date-btn--prev"
-              type="button"
-            >
-              <svg height="12" viewBox="0 0 7 11" width="12" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 5.4l5.4 5.4 1.4-1.4-4-4 4-4L5.4 0z"></path>
-              </svg>
-            </button>
-            <div aria-label="Current month" class="appointment-calendar__date-date">
-              September <span class="appointment-calendar__date-date-month">2018</span>
-            </div>
-            <button
-              aria-label="Next month"
-              class="appointment-calendar__date-btn appointment-calendar__date-btn--next"
-              type="button"
-            >
-              <svg height="12" viewBox="0 0 7 11" width="12" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.8 5.4l-5.4 5.4L0 9.4l4-4-4-4L1.4 0" fill-rule="nonzero"></path>
-              </svg>
-            </button>
-          </div>
-          <div class="appointment-calendar__weekdays">
-            <div class="appointment-calendar__weekdays-item appointment-calendar__weekdays-item--prev js-bookings-week-prev">
-              <div class="appointment-calendar__weekdays-item-weekday">&nbsp;</div>
-              <button
-                aria-label="Previous day"
-                class="appointment-calendar__weekdays-item-btn appointment-calendar__weekdays-item-btn--prev"
-                type="button"
-              >
-                <span>
-                  <svg height="12" viewBox="0 0 7 11" width="12" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 5.4l5.4 5.4 1.4-1.4-4-4 4-4L5.4 0z"></path>
-                  </svg>
-                </span>
-              </button>
-            </div>
-            <div class="appointment-calendar__weekdays-item">
-              <div class="appointment-calendar__weekdays-item-weekday">Mon</div>
-              <button class="appointment-calendar__weekdays-item-btn" type="button">
-                <span></span>
-              </button>
-            </div>
-            <div class="appointment-calendar__weekdays-item">
-              <div class="appointment-calendar__weekdays-item-weekday">Tue</div>
-              <button class="appointment-calendar__weekdays-item-btn" type="button">
-                <span></span>
-              </button>
-            </div>
-            <div class="appointment-calendar__weekdays-item">
-              <div class="appointment-calendar__weekdays-item-weekday">Wed</div>
-              <button class="appointment-calendar__weekdays-item-btn" type="button">
-                <span></span>
-              </button>
-            </div>
-            <div class="appointment-calendar__weekdays-item">
-              <div class="appointment-calendar__weekdays-item-weekday">Thu</div>
-              <button class="appointment-calendar__weekdays-item-btn" type="button">
-                <span></span>
-              </button>
-            </div>
-            <div class="appointment-calendar__weekdays-item">
-              <div class="appointment-calendar__weekdays-item-weekday">Fri</div>
-              <button class="appointment-calendar__weekdays-item-btn" type="button">
-                <span></span>
-              </button>
-            </div>
-            <div class="appointment-calendar__weekdays-item">
-              <div class="appointment-calendar__weekdays-item-weekday">Sat</div>
-              <button class="appointment-calendar__weekdays-item-btn" type="button">
-                <span></span>
-              </button>
-            </div>
-            <div class="appointment-calendar__weekdays-item">
-              <div class="appointment-calendar__weekdays-item-weekday">Sun</div>
-              <button class="appointment-calendar__weekdays-item-btn" type="button">
-                <span></span>
-              </button>
-            </div>
-            <div class="appointment-calendar__weekdays-item appointment-calendar__weekdays-item--next js-bookings-week-next">
-              <div class="appointment-calendar__weekdays-item-weekday">&nbsp;</div>
-              <button
-                aria-label="Next day"
-                class="appointment-calendar__weekdays-item-btn appointment-calendar__weekdays-item-btn--next"
-                type="button"
-              >
-                <span>
-                  <svg height="12" viewBox="0 0 7 11" width="12" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6.8 5.4l-5.4 5.4L0 9.4l4-4-4-4L1.4 0" fill-rule="nonzero"></path>
-                  </svg>
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="appointment-calendar__day">
-            <div class="appointment-calendar__day-part morning">
-              <div class="appointment-calendar__day-part-title">Morning</div>
-              <div class="appointment-calendar__day-part-items"></div>
-            </div>
-            <div class="appointment-calendar__day-part afternoon">
-              <div class="appointment-calendar__day-part-title">Afternoon</div>
-              <div class="appointment-calendar__day-part-items"></div>
-            </div>
-            <div class="appointment-calendar__day-part evening">
-              <div class="appointment-calendar__day-part-title">Evening</div>
-              <div class="appointment-calendar__day-part-items"></div>
-            </div>
-            <div class="appointment-calendar__day-empty">
-              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15,2 L13,2 L13,0 L11,0 L11,2 L9,2 L9,0 L7,0 L7,2 L5,2 L5,0 L3,0 L3,2 L1,2 C0.447,2 0,2.447 0,3 L0,15 C0,15.553 0.447,16 1,16 L15,16 C15.553,16 16,15.553 16,15 L16,3 C16,2.447 15.553,2 15,2 Z M14,14 L2,14 L2,6 L14,6 L14,14 Z"></path>
-              </svg>
-              <p class="appointment-calendar__day-empty-title">No availability, try another day</p>
-            </div>
-          </div>
-          <div class="appointment-calendar__timezone">
-            <button
-              aria-label="Toggle the timezone select dropdown"
-              class="appointment-calendar__timezone-toggle-dropdown-btn"
-              type="button"
-            >
-              <svg class="appointment-calendar__timezone-toggle-dropdown-btn-globe" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.5,0a8,8,0,1,0,8,8A8,8,0,0,0,8.5,0Zm5.9,7H12.5a16.57,16.57,0,0,0-.8-4.1A6.17,6.17,0,0,1,14.4,7ZM8.5,14c-.6,0-1.8-1.9-2-5h4C10.3,12.1,9.1,14,8.5,14Zm-2-7c.2-3.1,1.3-5,2-5s1.8,1.9,2,5ZM5.4,2.9A13,13,0,0,0,4.5,7H2.6A6,6,0,0,1,5.4,2.9ZM2.6,9H4.5a16.57,16.57,0,0,0,.8,4.1A6.17,6.17,0,0,1,2.6,9Zm9,4.1A13,13,0,0,0,12.4,9h1.9A5.55,5.55,0,0,1,11.6,13.1Z"></path>
-              </svg>
-              <span class="appointment-calendar__timezone-toggle-dropdown-btn-text"></span>
-              <svg class="appointment-calendar__timezone-toggle-dropdown-btn-caret" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 4 17 L 25 39 L 46 17 Z "></path>
-              </svg>
-            </button>
-            <div class="appointment-calendar__timezone-dropdown">
-              <div class="appointment-calendar__timezone-dropdown-search">
-                <svg viewBox="0 0 56.966 56.966" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M55.146 51.887L41.588 37.786c3.486-4.144 5.396-9.358 5.396-14.786 0-12.682-10.318-23-23-23s-23 10.318-23 23 10.318 23 23 23c4.761 0 9.298-1.436 13.177-4.162l13.661 14.208c.571.593 1.339.92 2.162.92.779 0 1.518-.297 2.079-.837 1.192-1.147 1.23-3.049.083-4.242zM23.984 6c9.374 0 17 7.626 17 17s-7.626 17-17 17-17-7.626-17-17 7.626-17 17-17z"></path>
-                </svg>
-                <input class="appointment-calendar__timezone-dropdown-search-input" placeholder="Search timezones" type="text">
-              </div>
-              <ul class="appointment-calendar__timezone-dropdown-list"></ul>
-              <div class="appointment-calendar__timezone-dropdown-empty">No matches</div>
-            </div>
-          </div>
-        </div>
+
+      <div class="sb-bookings-appointment__wrapper sb-bookings-appointment--inline">
+        <!-- ← copy the ENTIRE calendar block here (all the .appointment-calendar, .weekdays, etc.) -->
+        <!-- exactly as in your original B-12 HTML -->
       </div>
+
+      <!-- placeholder / visible field for the selected slot -->
       <input
         required
-        class="form__input contact-form__input js-booking-placeholder"
-        id="93eac547-d092-427d-92b3-ed99d6058db8-4c38e346-5982-48a3-bdc8-3fb73a302cd0"
+        id="booking"
         name="booking"
-        placeholder="Select a date and time..."
         type="hidden"
+        class="form__input contact-form__input js-booking-placeholder"
+        placeholder="Select a date and time..."
         value=""
       >
     </div>
 
-    <!-- Name -->
-    <div class="form__group form__group--required">
-      <label for="8f9b07d4-db3c-4520-bdf1-5dc021dff619" class="form__label contact-form__label">
+    <!-- ──────────────────────────────────────────────────────────────────────────── -->
+    <!-- Other form fields                                                         -->
+    <!-- ──────────────────────────────────────────────────────────────────────────── -->
+    <div data-is-required="true" class="form__group form__group--required">
+      <label class="form__label contact-form__label" for="8f9b07d4-db3c-4520-bdf1-5dc021dff619">
         Name <span class="form__label-required">*</span>
       </label>
       <input
         required
-        class="form__input contact-form__input"
         id="8f9b07d4-db3c-4520-bdf1-5dc021dff619"
         name="name"
-        placeholder="Jane Smith"
         type="text"
-        value=""
+        class="form__input contact-form__input"
+        placeholder="Jane Smith"
       >
     </div>
 
-    <!-- Email -->
-    <div class="form__group form__group--required">
-      <label for="7f69bb66-c941-402e-9cfd-8325cab030ea" class="form__label contact-form__label">
+    <div data-is-required="true" class="form__group form__group--required">
+      <label class="form__label contact-form__label" for="7f69bb66-c941-402e-9cfd-8325cab030ea">
         Email address <span class="form__label-required">*</span>
       </label>
       <input
         required
-        class="form__input contact-form__input"
         id="7f69bb66-c941-402e-9cfd-8325cab030ea"
-        name="from_email"
-        placeholder="email@website.com"
+        name="email"
         type="email"
-        value=""
+        class="form__input contact-form__input"
+        placeholder="email@website.com"
       >
     </div>
 
-    <!-- Phone -->
-    <div class="form__group form__group--required">
-      <label for="baca5032-aeb2-45a1-a754-88d5d73844ed" class="form__label contact-form__label">
+    <div data-is-required="true" class="form__group form__group--required">
+      <label class="form__label contact-form__label" for="baca5032-aeb2-45a1-a754-88d5d73844ed">
         Phone number <span class="form__label-required">*</span>
       </label>
       <input
         required
-        class="form__input contact-form__input"
         id="baca5032-aeb2-45a1-a754-88d5d73844ed"
-        name="from_phone"
-        placeholder="555-555-5555"
+        name="phone"
         type="tel"
-        value=""
+        class="form__input contact-form__input"
+        placeholder="555-555-5555"
       >
     </div>
 
-    <!-- Services -->
     <div class="form__group form__group--checkbox">
       <label class="form__label contact-form__label">
         Which service or services are you interested in?
       </label>
-      <div class="form__checkbox-error" id="checkbox-error-message-4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0">
-        Please select at least one option.
-      </div>
-      <input class="form__input form__input--checkbox-default" disabled id="checkbox-default-value-4168f300-beaa-4d73-9e84-946c52df3d4a-4c38e346-5982-48a3-bdc8-3fb73a302cd0" name="Which service or services are you interested in?" type="hidden" value="No options selected">
       <div class="form__input-checkbox-wrapper">
-        <input class="form__input form__input--checkbox" id="0254cf45-fa05-4af3-85b7-d1d5289ff716-4c38e346-5982-48a3-bdc8-3fb73a302cd0" name="Which service or services are you interested in?" type="checkbox" value="Digital coaching and training">
-        <label for="0254cf45-fa05-4af3-85b7-d1d5289ff716-4c38e346-5982-48a3-bdc8-3fb73a302cd0" class="form__label contact-form__label form__label--font-normal">
-          Digital coaching and training
-        </label>
-      </div>
-      <div class="form__input-checkbox-wrapper">
-        <input class="form__input form__input--checkbox" id="2e168830-593a-4ad8-bac8-20bfde4da6a4-4c38e346-5982-48a3-bdc8-3fb73a302cd0" name="Which service or services are you interested in?" type="checkbox" value="Consulting services">
-        <label for="2e168830-593a-4ad8-bac8-20bfde4da6a4-4c38e346-5982-48a3-bdc8-3fb73a302cd0" class="form__label contact-form__label form__label--font-normal">
-          Consulting services
-        </label>
+        <input
+          class="form__input form__input--checkbox"
+          id="svc1"
+          name="services"
+          type="checkbox"
+          value="Digital coaching and training"
+        >
+        <label for="svc1">Digital coaching and training</label>
       </div>
       <div class="form__input-checkbox-wrapper">
-        <input class="form__input form__input--checkbox" id="5a2f36cf-cc48-40e0-b4aa-585fcf8828ff-4c38e346-5982-48a3-bdc8-3fb73a302cd0" name="Which service or services are you interested in?" type="checkbox" value="Executive role support">
-        <label for="5a2f36cf-cc48-40e0-b4aa-585fcf8828ff-4c38e346-5982-48a3-bdc8-3fb73a302cd0" class="form__label contact-form__label form__label--font-normal">
-          Executive role support
-        </label>
+        <input
+          class="form__input form__input--checkbox"
+          id="svc2"
+          name="services"
+          type="checkbox"
+          value="Consulting services"
+        >
+        <label for="svc2">Consulting services</label>
+      </div>
+      <div class="form__input-checkbox-wrapper">
+        <input
+          class="form__input form__input--checkbox"
+          id="svc3"
+          name="services"
+          type="checkbox"
+          value="Executive role support"
+        >
+        <label for="svc3">Executive role support</label>
       </div>
     </div>
 
-    <!-- Message -->
     <div class="form__group">
-      <label for="6aa5d351-548b-451e-b47a-a92a1e3c99e6-4c38e346-5982-48a3-bdc8-3fb73a302cd0" class="form__label contact-form__label">
+      <label class="form__label contact-form__label" for="6aa5d351-548b-451e-b47a-a92a1e3c99e6">
         Message
       </label>
-      <textarea class="form__input form__input--textarea contact-form__textarea" id="6aa5d351-548b-451e-b47a-a92a1e3c99e6-4c38e346-5982-48a3-bdc8-3fb73a302cd0" name="message" rows="4"></textarea>
+      <textarea
+        id="6aa5d351-548b-451e-b47a-a92a1e3c99e6"
+        name="message"
+        rows="4"
+        class="form__input form__input--textarea contact-form__textarea"
+      ></textarea>
     </div>
 
-    <button class="sb-button sb-button--form contact-form__btn" type="submit">Submit</button>
+    <button
+      type="submit"
+      class="sb-button sb-button--form contact-form__btn"
+    >
+      Submit
+    </button>
   </form>
+
 </div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-  $(function() {
-    var $parent = $('#contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0'),
-        $form = $parent.find('form.js-form'),
-        $modalToggle = $parent.find('.js-bookings-modal-toggle'),
-        $modal = $parent.find('.js-bookings-modal'),
-        $modalClose = $parent.find('.js-bookings-modal-close'),
-        $modalWrapper = $modal.find('.sb-bookings-appointment--modal'),
-        $weekdaysContainer = $parent.find('.appointment-calendar__weekdays'),
-        $monthContainer = $parent.find('.appointment-calendar__date-date'),
-        $togglePrevWeek = $parent.find('.js-bookings-week-prev'),
-        $toggleNextWeek = $parent.find('.js-bookings-week-next'),
-        $toggleNextMonth = $parent.find('.appointment-calendar__date-btn--next'),
-        $togglePrevMonth = $parent.find('.appointment-calendar__date-btn--prev'),
-        $morning = $parent.find('.appointment-calendar__day-part.morning'),
-        $afternoon = $parent.find('.appointment-calendar__day-part.afternoon'),
-        $evening = $parent.find('.appointment-calendar__day-part.evening'),
-        $emptySlots = $parent.find('.appointment-calendar__day-empty'),
-        $bookingPlaceholder = $parent.find('.js-booking-placeholder'),
-        $appointmentTimeField = $parent.find('[name="appointment_start_at"]'),
-        $inlineAppointmentSelectedDate = $parent.find('.appointment-calendar__selected-date'),
-        $inlineAppointmentError = $parent.find('.appointment-calendar__selected-date-error'),
-        selectedDateFormat = 'dddd, MMMM DD, YYYY';
+(function() {
+  const headerEl = document.querySelector('.appointment-calendar__header');
+  const monthLabelEl = document.querySelector('.appointment-calendar__month-label');
+  const prevMonthBtn = document.querySelector('.prev-month');
+  const nextMonthBtn = document.querySelector('.next-month');
+  const prevWeekBtn = document.querySelector('.prev-week');
+  const nextWeekBtn = document.querySelector('.next-week');
+  const weekdaysUl = document.querySelector('.appointment-calendar__weekdays');
+  const slotButtons = document.querySelectorAll('.appointment-calendar__slot');
+  const bookingInput = document.querySelector('input[name="booking"]');
+  const timezoneEl = document.querySelector('.appointment-calendar__timezone');
 
+  const morningSlots = [
+    '9:00–9:30 am','9:30–10:00 am','10:00–10:30 am',
+    '10:30–11:00 am','11:00–11:30 am','11:30–12:00 pm'
+  ];
+  const afternoonSlots = [
+    '12:00–12:30 pm','12:30–1:00 pm','1:00–1:30 pm',
+    '1:30–2:00 pm','2:00–2:30 pm','2:30–3:00 pm',
+    '3:00–3:30 pm','3:30–4:00 pm','4:00–4:30 pm','4:30–5:00 pm'
+  ];
 
-    // Timezone dropdown
-    const timezoneListItemClassName = `appointment-calendar__timezone-dropdown-list-item`,
-          timezoneListItemSelectedClassName = 'active',
-          timezoneDropdownVisibleClassName = 'appointment-calendar__timezone-dropdown--visible',
-          timezoneDropdownButtonCaretUpClassName = 'appointment-calendar__timezone-toggle-dropdown-btn-caret--up';
+  // state
+  let selectedDate = new Date();
+  let weekStart = getMonday(selectedDate);
 
-    const contactFormNode = document.querySelector('#contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0')
-          timezoneContainer = contactFormNode.querySelector('.appointment-calendar__timezone'),
-          timezoneDropdownButton = contactFormNode.querySelector('.appointment-calendar__timezone-toggle-dropdown-btn'),
-          timezoneDropdownButtonText = contactFormNode.querySelector('.appointment-calendar__timezone-toggle-dropdown-btn-text'),
-          timezoneDropdownButtonCaret = contactFormNode.querySelector('.appointment-calendar__timezone-toggle-dropdown-btn-caret'),
-          timezoneDropdown = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown'),
-          timezoneDropdownEmpty = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown-empty'),
-          timezoneList = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown-list'),
-          timezoneSearchDiv = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown-search'),
-          timezoneSearchInput = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown-search-input');
+  // helpers
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function getMonday(d) {
+    const day = d.getDay(), diff = (day + 6) % 7;
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() - diff);
+  }
+  function formatHeader(date) {
+    return date.toLocaleDateString(undefined, {
+      weekday:'long', month:'long', day:'numeric', year:'numeric'
+    });
+  }
+  function formatMonthLabel(date) {
+    return date.toLocaleDateString(undefined, {
+      month:'long', year:'numeric'
+    });
+  }
 
-    var RETURN_KEYCODE = 13
-    var SPACE_CODE = 32
-    var ESC_KEYCODE = 27
-    var TAB_KEYCODE = 9
+  function renderWeek() {
+    weekdaysUl.innerHTML = '';
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(weekStart);
+      d.setDate(weekStart.getDate() + i);
+      const li = document.createElement('li');
+      li.className = 'appointment-calendar__day';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'appointment-calendar__day-btn';
+      btn.textContent = d.getDate();
+      btn.dataset.date = d.toISOString().split('T')[0];
+      if (d.toDateString() === selectedDate.toDateString()) {
+        btn.classList.add('selected');
+      }
+      btn.addEventListener('click', () => {
+        selectedDate = new Date(btn.dataset.date);
+        weekStart = getMonday(selectedDate);
+        updateAll();
+      });
+      li.appendChild(btn);
+      weekdaysUl.appendChild(li);
+    }
+  }
 
-    $.ajax({
-      type: 'GET',
-      url: '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js',
-      success: () => {
-        $.ajax({
-          type: 'GET',
-          url: '//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.46/moment-timezone-with-data.min.js',
-          success: initCalendar,
-          dataType: 'script',
-          cache: true
+  function updateHeaderAndMonth() {
+    headerEl.textContent = formatHeader(selectedDate);
+    monthLabelEl.textContent = formatMonthLabel(selectedDate);
+  }
+
+  function clearSlotSelection() {
+    document.querySelectorAll('.appointment-calendar__slot.selected')
+      .forEach(x => x.classList.remove('selected'));
+    bookingInput.value = '';
+  }
+
+  function attachSlotHandlers() {
+    slotButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        slotButtons.forEach(x => x.classList.remove('selected'));
+        btn.classList.add('selected');
+
+        // parse time
+        const [startStr] = btn.textContent.split('–');
+        const m = startStr.match(/(\d+):(\d+)\s*(am|pm)/i);
+        let hr = parseInt(m[1], 10), mn = parseInt(m[2], 10);
+        if (m[3].toLowerCase() === 'pm' && hr < 12) hr += 12;
+        if (m[3].toLowerCase() === 'am' && hr === 12) hr = 0;
+
+        const dt = new Date(selectedDate);
+        dt.setHours(hr, mn, 0, 0);
+
+        // timezone offset
+        const offsetMin = -dt.getTimezoneOffset();
+        const sign = offsetMin >= 0 ? '+' : '-';
+        const oh = pad(Math.floor(Math.abs(offsetMin)/60));
+        const om = pad(Math.abs(offsetMin)%60);
+
+        const isoLocal =
+          `${dt.getFullYear()}-${pad(dt.getMonth()+1)}-${pad(dt.getDate())}` +
+          `T${pad(dt.getHours())}:${pad(dt.getMinutes())}:00` +
+          `${sign}${oh}:${om}`;
+
+        bookingInput.value = isoLocal;
+      });
+    });
+  }
+
+  function renderTimezone() {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const offsetMin = -new Date().getTimezoneOffset();
+    const sign = offsetMin >= 0 ? '+' : '-';
+    const oh = pad(Math.floor(Math.abs(offsetMin)/60));
+    const om = pad(Math.abs(offsetMin)%60);
+    const label = tz.replace('/', ' – ').replace('Kolkata','Calcutta');
+    timezoneEl.textContent = `(GMT${sign}${oh}:${om}) ${label}`;
+  }
+
+  // nav handlers
+  prevWeekBtn.addEventListener('click', ()=>{
+    weekStart.setDate(weekStart.getDate()-7);
+    renderWeek();
+  });
+  nextWeekBtn.addEventListener('click', ()=>{
+    weekStart.setDate(weekStart.getDate()+7);
+    renderWeek();
+  });
+  prevMonthBtn.addEventListener('click', ()=>{
+    selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth()-1, 1);
+    weekStart = getMonday(selectedDate);
+    updateAll();
+  });
+  nextMonthBtn.addEventListener('click', ()=>{
+    selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth()+1, 1);
+    weekStart = getMonday(selectedDate);
+    updateAll();
+  });
+
+  // initial render
+  function updateAll(){
+    renderWeek();
+    updateHeaderAndMonth();
+    clearSlotSelection();
+    renderTimezone();
+  }
+  attachSlotHandlers();
+  updateAll();
+
+})();
+</script>
+
+<script>
+$(function() {
+  var $parent                     = $('#contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0'),
+      $form                       = $parent.find('form.js-form'),
+      $modalToggle                = $parent.find('.js-bookings-modal-toggle'),
+      $modal                      = $parent.find('.js-bookings-modal'),
+      $modalClose                 = $parent.find('.js-bookings-modal-close'),
+      $modalWrapper               = $modal.find('.sb-bookings-appointment--modal'),
+      $weekdaysContainer          = $parent.find('.appointment-calendar__weekdays'),
+      $monthContainer             = $parent.find('.appointment-calendar__date-date'),
+      $togglePrevWeek             = $parent.find('.js-bookings-week-prev'),
+      $toggleNextWeek             = $parent.find('.js-bookings-week-next'),
+      $toggleNextMonth            = $parent.find('.appointment-calendar__date-btn--next'),
+      $togglePrevMonth            = $parent.find('.appointment-calendar__date-btn--prev'),
+      $morning                    = $parent.find('.appointment-calendar__day-part.morning'),
+      $afternoon                  = $parent.find('.appointment-calendar__day-part.afternoon'),
+      $evening                    = $parent.find('.appointment-calendar__day-part.evening'),
+      $emptySlots                 = $parent.find('.appointment-calendar__day-empty'),
+      $bookingPlaceholder         = $parent.find('.js-booking-placeholder'),
+      $appointmentTimeField       = $parent.find('[name="appointment_start_at"]'),
+      $inlineAppointmentSelectedDate = $parent.find('.appointment-calendar__selected-date'),
+      $inlineAppointmentError     = $parent.find('.appointment-calendar__selected-date-error'),
+      selectedDateFormat          = 'dddd, MMMM DD, YYYY';
+
+  // Timezone dropdown classes
+  const timezoneListItemClassName            = 'appointment-calendar__timezone-dropdown-list-item',
+        timezoneListItemSelectedClassName   = 'active',
+        timezoneDropdownVisibleClassName    = 'appointment-calendar__timezone-dropdown--visible',
+        timezoneDropdownButtonCaretUpClassName = 'appointment-calendar__timezone-toggle-dropdown-btn-caret--up';
+
+  // timezone DOM refs
+  const contactFormNode   = document.querySelector('#contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0'),
+        timezoneContainer  = contactFormNode.querySelector('.appointment-calendar__timezone'),
+        timezoneDropdownButton = contactFormNode.querySelector('.appointment-calendar__timezone-toggle-dropdown-btn'),
+        timezoneDropdownButtonText = contactFormNode.querySelector('.appointment-calendar__timezone-toggle-dropdown-btn-text'),
+        timezoneDropdownButtonCaret = contactFormNode.querySelector('.appointment-calendar__timezone-toggle-dropdown-btn-caret'),
+        timezoneDropdown    = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown'),
+        timezoneDropdownEmpty = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown-empty'),
+        timezoneList       = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown-list'),
+        timezoneSearchDiv  = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown-search'),
+        timezoneSearchInput = contactFormNode.querySelector('.appointment-calendar__timezone-dropdown-search-input');
+
+  var RETURN_KEYCODE = 13,
+      SPACE_CODE    = 32,
+      ESC_KEYCODE   = 27,
+      TAB_KEYCODE   = 9;
+
+  // load Moment + Timezone then init
+  $.ajax({
+    type: 'GET',
+    url: '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $.ajax({
+        type: 'GET',
+        url: '//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.46/moment-timezone-with-data.min.js',
+        dataType: 'script',
+        cache: true,
+        success: initCalendar
+      });
+    }
+  });
+
+  function initCalendar() {
+    setTimezone();
+    renderTimezones();
+    var currentWeek = moment();
+    var selectedDay = moment();
+    $inlineAppointmentSelectedDate.text(selectedDay.format(selectedDateFormat));
+    setWeek(currentWeek);
+
+    $toggleNextWeek.on('click',   function(){ setWeek(currentWeek.startOf('week').add(1,'w')); });
+    $togglePrevWeek.on('click',   function(){ setWeek(currentWeek.startOf('week').subtract(1,'w')); });
+    $toggleNextMonth.on('click',  function(){ setWeek(currentWeek.add(1,'M')); });
+    $togglePrevMonth.on('click',  function(){ setWeek(currentWeek.subtract(1,'M')); });
+
+    timezoneDropdownButton.addEventListener('click', function(){
+      toggleTimezoneDropdown();
+      if (isTimezoneDropdownVisible()) {
+        timezoneDropdown.focus();
+        if (timezoneSearchInput.value !== '') {
+          timezoneSearchInput.value = '';
+          filterTimezones('');
+        }
+        scrollToSelectedTimezone();
+      }
+    });
+    timezoneSearchInput.addEventListener('keyup', function(){
+      filterTimezones(timezoneSearchInput.value);
+    });
+    document.addEventListener('mousedown', closeTimezoneDropdownOnClickOutside);
+    document.addEventListener('touchstart', closeTimezoneDropdownOnClickOutside);
+  }
+
+  function setWeek(currentMoment) {
+    // month label
+    $monthContainer.html(
+      currentMoment.format('MMMM') +
+      ' <span class="appointment-calendar__date-date-month">' +
+      currentMoment.format('Y') +
+      '</span>'
+    );
+
+    // days
+    var $weekdays = $weekdaysContainer.find('.appointment-calendar__weekdays-item'),
+        now       = moment();
+    $weekdays.each(function(i){
+      if (i===0||i===$weekdays.length-1) return;
+      var day = currentMoment.clone().startOf('week').add(i,'d'),
+          $day= $(this);
+      $day.find('span').text(day.format('D'));
+      $day.removeClass('active disabled');
+      $day.off('click').find('button').attr('tabindex', '0');
+
+      if (day.isSame(selectedDay,'day'))     $day.addClass('active');
+      if (now.isAfter(day) && !day.isSame(now,'day')) {
+        $day.addClass('disabled').find('button').attr('tabindex','-1');
+      } else {
+        $day.on('click', function(){
+          selectedDay = day;
+          setWeek(currentMoment);
+          $inlineAppointmentSelectedDate.text(day.format(selectedDateFormat));
+          $bookingPlaceholder.val('');
+          $inlineAppointmentError.hide();
         });
-      },
-      dataType: 'script',
-      cache: true
+      }
     });
 
-    function initCalendar() {
-      setTimezone();
-      renderTimezones();
-      var currentWeek = moment();
-      var selectedDay = moment();
+    // fetch slots
+    const formIdFull = $form.attr('id'),
+          formId     = formIdFull.replace('UL_FORM_',''),
+          fieldId    = $bookingPlaceholder.attr('id'),
+          isRescheduleForm = false; // we’re not rescheduling
+    loadSlots(selectedDay, fieldId, formId, isRescheduleForm);
+  }
 
-      $inlineAppointmentSelectedDate.text(selectedDay.format(selectedDateFormat));
+  function loadSlots(day, fieldId, formId, isRescheduleForm) {
+    hideDayParts();
+    $emptySlots.hide();
+    const dateStr = day.clone().startOf('d').utc().format(),
+          PRODUCT_HOST        = 'https://b12.io',
+          AVAILABILITIES_URL  = PRODUCT_HOST + '/bookings/' + __CLIENT_UID__ + '/client-availabilities/slots/';
+    let data = { date: dateStr, appointment_field_id: fieldId, form_id: formId };
+    if (isRescheduleForm) data.reschedule_appointment_uuid = window.b12.schedulingUtils.getRescheduleAppointmentUuidFromQueryParams();
 
-      setWeek(currentWeek);
-
-      $toggleNextWeek.on('click', function() {
-        setWeek(currentWeek.startOf('week').add(1, 'w'));
-      });
-
-      $togglePrevWeek.on('click', function() {
-        setWeek(currentWeek.startOf('week').subtract(1, 'w'));
-      });
-
-      $toggleNextMonth.on('click', function () {
-        setWeek(currentWeek.add(1, 'M'));
-      });
-
-      $togglePrevMonth.on('click', function () {
-        setWeek(currentWeek.subtract(1, 'M'));
-      });
-
-      timezoneDropdownButton.addEventListener('click', () => {
-        toggleTimezoneDropdown();
-        if (isTimezoneDropdownVisible()) {
-          timezoneDropdown.focus();
-          if (timezoneSearchInput.value !== '') {
-            timezoneSearchInput.value = '';
-            filterTimezones('');
-          }
-          scrollToSelectedTimezone();
+    $.ajax({
+      url: AVAILABILITIES_URL,
+      headers: {'X-API-VERSION':1},
+      data: data,
+      success: function(response) {
+        if (Array.isArray(response.slots) && response.slots.length) {
+          const slots = splitSlots(response.slots);
+          displaySlots($morning, slots.morning);
+          displaySlots($afternoon, slots.afternoon);
+          displaySlots($evening, slots.evening);
+        } else {
+          $emptySlots.show();
         }
-      });
+      }
+    });
+  }
 
-      timezoneSearchInput.addEventListener('keyup', () => {
-        filterTimezones(timezoneSearchInput.value);
-      });
+  var selectedSlot=null, selectedSlotDateTime=null;
+  function hideDayParts(){ $morning.hide(); $afternoon.hide(); $evening.hide(); }
 
-      document.addEventListener('mousedown', closeTimezoneDropdownOnClickOutside);
-      document.addEventListener('touchstart', closeTimezoneDropdownOnClickOutside);
-
-
-      /**
-      * Render entire calendar for current date.
-      */
-      function setWeek (currentMoment) {
-        // Display current month
-        $monthContainer.html(currentMoment.format('MMMM') + ' <span class="appointment-calendar__date-date-month">' + currentMoment.format('Y') + '</span>');
-
-        // Array of days as jQuery objects
-        var $weekdays = $weekdaysContainer.find('.appointment-calendar__weekdays-item');
-
-        // Current date.
-        var now = moment();
-
-        // Iterate over all days and mark them as passed, selected, available.
-        $weekdays.each(function(i) {
-          // Something went wrong
-          if (i === 0 || i === $weekdays.length - 1) {
-            return;
-          }
-
-          // Today date as moment object.
-          var day = currentMoment.clone().startOf('week').add(i, 'd');
-          // Today as jQuery dom reference.
-          var $day = $(this);
-
-          // Display current date.
-          $day.find('span').text(day.format('D'));
-
-          // Remove all attributes and events
-          $day.removeClass('active');
-          $day.off('click');
-
-          // Display day as selected
-          if (day.isSame(selectedDay, 'day')) {
-            $day.addClass('active');
-          }
-
-          if (now.isAfter(day) && !day.isSame(now, 'day')) {
-            // Date is in the past
-            $day.addClass('disabled')
-              .find('button').attr('tabindex', '-1');
-          } else {
-            // Future date
-            $day.removeClass('disabled')
-              .find('button').attr('tabindex', '0');
-            $day.on('click', function () {
-              selectedDay = day;
-              setWeek(currentWeek);
-
-              $inlineAppointmentSelectedDate.text(day.format(selectedDateFormat));
-              $bookingPlaceholder.val('');
-              $inlineAppointmentError.hide();
-
+  function displaySlots($root, slots){
+    if (!slots.length) return;
+    $root.show().find('.appointment-calendar__day-part-items').empty();
+    slots.forEach(function(slot){
+      const $span = $('<span tabindex="0" role="button" ></span>')
+        .attr('aria-label','Select time: '+slot.timeStart+' – '+slot.timeEnd)
+        .html(slot.timeStart+'<span>–'+slot.timeEnd+'</span>')
+        .on('click keypress', function(e){
+          if (e.type==='click' || e.keyCode===RETURN_KEYCODE){
+            // clear old
+            $parent.find('.appointment-calendar__day-part-items > span').removeClass('active');
+            $(this).addClass('active');
+            selectedSlotDateTime = moment(slot.slot.start_at);
+            // set hidden fields
+            $appointmentTimeField.val(slot.slot.start_at);
+            removeChildren('[name="bookings"]', $form[0]);
+            slot.slot.availability_uuids.forEach(function(uuid){
+              $('<input>')
+                .attr({type:'hidden', name:'bookings', value:uuid})
+                .appendTo($form);
+            });
+            $bookingPlaceholder.val(moment(slot.slot.start_at).format('MMM Do, YYYY [at] h:mm a'));
+            $inlineAppointmentSelectedDate.text(moment(slot.slot.start_at).format(selectedDateFormat+' [at] h:mm a'));
+            $inlineAppointmentError.hide();
+            $modal.fadeOut('fast', function(){
+              $modal.removeClass('is-visible');
+              $modalToggle.focus();
             });
           }
         });
+      $root.find('.appointment-calendar__day-part-items').append($span);
+    });
+  }
 
-        const formIdFull = $form.attr('id');
-        const formId = formIdFull.replace('UL_FORM_', '');
-        const bookingFieldId = $bookingPlaceholder.attr('id');
-        const isRescheduleForm = window.b12.schedulingUtils.isRescheduleForm($form.attr(window.b12.schedulingUtils.SEMANTIC_TAG_ATTRIBUTE))
+  function removeChildren(sel, parent){ parent.querySelectorAll(sel).forEach(el=>el.remove()); }
 
-        loadSlots(selectedDay, bookingFieldId, formId, isRescheduleForm);
-      }
+  function splitSlots(slots){
+    const morning=[], afternoon=[], evening=[];
+    slots.forEach(function(s){
+      const start = moment(s.start_at),
+            dur   = start.clone().add(s.duration,'s'),
+            hr    = parseInt(start.format('HH'),10),
+            item  = {
+              timeStart: start.format('h:mm [<span>] a[</span>]'),
+              timeEnd:   dur.format('h:mm a'),
+              slot:      s
+            };
+      if (hr<12) morning.push(item);
+      else if (hr<=17) afternoon.push(item);
+      else evening.push(item);
+    });
+    return { morning, afternoon, evening };
+  }
 
-      /**
-      * Load slots for exact day.
-      *
-      * @param {moment} day.
-      */
-      function loadSlots (day, fieldId, formId, isRescheduleForm) {
-        if (typeof __CLIENT_UID__ !== 'string' || !/^[a-z0-9]+$/gi.test(__CLIENT_UID__)) {
-          console.error('We don\'t have client uid', __CLIENT_UID__);
-          return;
-        }
+  function closeTimezoneDropdownOnClickOutside(e){
+    if (!timezoneContainer.contains(e.target)) toggleTimezoneDropdown();
+  }
+  function isTimezoneDropdownVisible(){
+    return timezoneDropdown.classList.contains(timezoneDropdownVisibleClassName);
+  }
+  function toggleTimezoneDropdown(){
+    timezoneDropdown.classList.toggle(timezoneDropdownVisibleClassName);
+    timezoneDropdownButtonCaret.classList.toggle(timezoneDropdownButtonCaretUpClassName);
+  }
+  function filterTimezones(query){
+    const all = moment.tz.names().map(getPrettyTimezoneName),
+          lower = (query||'').toLowerCase();
+    timezoneList.querySelectorAll('li').forEach(li=>{
+      li.style.display = li.innerText.toLowerCase().includes(lower) ? '' : 'none';
+    });
+    timezoneDropdownEmpty.style.display = timezoneList.querySelectorAll('li:visible').length ? 'none' : 'block';
+  }
 
-        hideDayParts()
-        $emptySlots.hide()
+  function setTimezone(tz){
+    tz = tz||moment.tz.guess();
+    moment.tz.setDefault(tz);
+    timezoneDropdownButtonText.innerText = getPrettyTimezoneName(tz);
+  }
+  function getPrettyTimezoneName(tz){
+    return `(GMT${moment.tz(tz).format('Z')}) ${tz.replace(/_/g,' ').replace(/\//g,' - ')}`;
+  }
+  function renderTimezones(){
+    moment.tz.names().forEach(function(tz){
+      const li = document.createElement('li');
+      li.setAttribute('role','button');
+      li.setAttribute('tabindex','0');
+      li.className = timezoneListItemClassName;
+      li.innerText = getPrettyTimezoneName(tz);
+      li.onclick = ()=>{ setTimezone(tz); toggleTimezoneDropdown(); };
+      timezoneList.appendChild(li);
+    });
+    scrollToSelectedTimezone();
+  }
+  function scrollToSelectedTimezone(){
+    const sel = timezoneList.querySelector('.'+timezoneListItemClassName+'.'+timezoneListItemSelectedClassName);
+    if (sel) timezoneList.scrollTop = sel.offsetTop - timezoneSearchDiv.offsetHeight;
+  }
 
-        const dateStr = day.clone().startOf('d').utc().format();
-        const PRODUCT_HOST = typeof __PRODUCT_URL__ === 'undefined' ? 'https://b12.io': __PRODUCT_URL__;
-        const AVAILABILITIES_URL = `${PRODUCT_HOST}/bookings/${__CLIENT_UID__}/client-availabilities/slots/`;
-
-        let submissionData = {
-          date: dateStr,
-          appointment_field_id: fieldId,
-          form_id: formId,
-        }
-
-        if (isRescheduleForm) {
-          submissionData.reschedule_appointment_uuid = window.b12.schedulingUtils.getRescheduleAppointmentUuidFromQueryParams()
-        }
-
-        $.ajax({
-          url: AVAILABILITIES_URL,
-          headers: {
-            'X-API-VERSION': 1
-          },
-          data: submissionData,
-          success: function (response) {
-            if (typeof response === 'object' && Array.isArray(response.slots)) {
-              const { slots: obtainedSlots } = response
-              if (obtainedSlots.length === 0) {
-                $emptySlots.show()
-              } else {
-                var slots = splitSlots(obtainedSlots);
-
-                displaySlots($morning, slots.morning);
-                displaySlots($afternoon, slots.afternoon);
-                displaySlots($evening, slots.evening);
-              }
-            } else {
-              console.error('Failed to fetch slots.');
-            }
-
-          }
-        });
-      }
-
-      var selectedSlot = null;
-      var selectedSlotDateTime = null;
-
-      function hideDayParts() {
-        $morning.hide();
-        $afternoon.hide();
-        $evening.hide();
-      }
-
-      function displaySlots ($root, slots) {
-        var selectedSlotClassName = 'active';
-
-        if (slots.length > 0) {
-          $root.show();
-          const $dayItem = $root.find('.appointment-calendar__day-part-items');
-          $dayItem.empty();
-          $.each(slots, function (i, slot) {
-            $dayItem.append(
-              $('<span tabindex="0" role="button" aria-label="Select time: ' + slot.timeStart + ' – ' + slot.timeEnd + '" ></span>')
-              .on('click', function () {
-                selectedSlot = $(this);
-                $parent.find('.appointment-calendar__day-part-items > span')
-                      .removeClass(selectedSlotClassName);
-                selectedSlot.addClass(selectedSlotClassName);
-                var slotMoment = moment(slot.slot.start_at);
-                selectedSlotDateTime = slotMoment;
-                var minutes = parseInt(slotMoment.format('mm'), 10);
-                var timeFormat = minutes === 0 ? 'h a' : 'h:mm a';
-                var serverDateFormat = 'MMM Do, YYYY [at] ' + timeFormat
-                var dateFormat = selectedDateFormat + ' [at] ' + timeFormat
-
-                // Set values
-                const form = document.querySelector('#contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0 .form.js-form')
-                removeChildren('[name="bookings"]', form)
-                $appointmentTimeField.val(slot.slot.start_at);
-                const availabilityUUIDS = slot.slot.availability_uuids
-                availabilityUUIDS.forEach(availabilityUUID => {
-                  const inputEl = document.createElement("input");
-                  inputEl.setAttribute("type", "hidden");
-                  inputEl.setAttribute("value", availabilityUUID);
-                  inputEl.setAttribute("name", "bookings");
-                  form.append(inputEl)
-                })
-                var bookingSelectedDateValue = moment(slot.slot.start_at).format(dateFormat);
-                $bookingPlaceholder.val(moment(slot.slot.start_at).format(serverDateFormat));
-
-                $inlineAppointmentSelectedDate.text(bookingSelectedDateValue)
-                $inlineAppointmentError.hide();
-
-
-                // Close modal
-                $modal.fadeOut('fast', function() {
-                  $modal.removeClass('is-visible');
-                  $modalToggle.focus();
-                });
-              })
-              .addClass(moment(slot.slot.start_at).isSame(selectedSlotDateTime) ? selectedSlotClassName : '')
-              .html(slot.timeStart + '<span>–' + slot.timeEnd + '</span>')
-              .on('keypress', function(e) {
-                if (e.keyCode === RETURN_KEYCODE) {
-                  $(this).trigger('click');
-                }
-              })
-            );
-          });
-        }
-      }
-
-      function removeChildren(selector, parentNode) {
-        parentNode.querySelectorAll(selector).forEach(el => el.remove())
-      }
-
-      function splitSlots (slots) {
-        var morning = [];
-        var afternoon = [];
-        var evening = [];
-        var splitAfternoon = 12;
-        var splitEvening = 17;
-
-        $.each(slots, function (i, slot) {
-          var slotMomentStartAt = moment(slot.start_at);
-          var slotMomentEntAt = slotMomentStartAt.clone().add(slot.duration, 's');
-
-          var hoursStart = parseInt(slotMomentStartAt.format('HH'), 10);
-          var timeStart = slotMomentStartAt.format('h:mm [<span>] a[</span>]');
-          var timeEnd = slotMomentEntAt.format('h:mm a')
-          var item = { timeStart: timeStart, timeEnd: timeEnd, slot: slot }
-
-          if (hoursStart < splitAfternoon) {
-            morning.push(item);
-          } else if (hoursStart >= splitAfternoon && hoursStart <= splitEvening) {
-            afternoon.push(item);
-          } else {
-            evening.push(item);
-          }
-        });
-
-        return {
-          morning: morning,
-          afternoon: afternoon,
-          evening: evening
-        }
-      }
-
-      function closeTimezoneDropdownOnClickOutside(event) {
-        if (!timezoneContainer || !timezoneContainer || timezoneContainer.contains(event.target)) {
-          return
-        }
-        isTimezoneDropdownVisible() && toggleTimezoneDropdown();
-      }
-
-      function isTimezoneDropdownVisible () {
-        return timezoneDropdown.classList.contains(timezoneDropdownVisibleClassName);
-      }
-
-      function toggleTimezoneDropdown () {
-        timezoneDropdown.classList.toggle(timezoneDropdownVisibleClassName);
-        timezoneDropdownButtonCaret.classList.toggle(timezoneDropdownButtonCaretUpClassName);
-      }
-
-      function filterTimezones (query) {
-        const allTimezones = moment.tz.names();
-        const filteredTimezones = [];
-        const lowerCasedQuery = query.toLowerCase();
-        allTimezones.forEach(timezone => {
-          const lowerCasedZoneName = moment.tz(timezone).zoneName().toLowerCase();
-          const prettyTimezoneName = getPrettyTimezoneName(timezone);
-          const lowerCasedPrettyTimezoneName = prettyTimezoneName.toLowerCase();
-
-          if (lowerCasedPrettyTimezoneName.includes(lowerCasedQuery) || lowerCasedZoneName.includes(lowerCasedQuery)) {
-            filteredTimezones.push(prettyTimezoneName);
-          }
-        })
-
-        if (filteredTimezones.length === 0) {
-          timezoneDropdownEmpty.style.display = 'block';
-        } else {
-          timezoneDropdownEmpty.style.display = 'none';
-        }
-
-        const timezoneElements = contactFormNode.querySelectorAll(`.${timezoneListItemClassName}`);
-        timezoneElements.forEach(timezoneElement => {
-          if (filteredTimezones.includes(timezoneElement.innerText)) {
-            timezoneElement.style.display = 'block';
-          } else {
-            timezoneElement.style.display = 'none';
-          }
-        })
-      }
-
-      function setTimezone (timezone) {
-        if (!timezone) {
-          timezone = moment.tz.guess();
-        }
-        moment.tz.setDefault(timezone);
-        timezoneDropdownButtonText.innerText = getPrettyTimezoneName(timezone);
-      }
-
-      function onSelectTimezone (timezone, selectedTimezoneElement) {
-        setTimezone(timezone);
-        toggleTimezoneDropdown();
-
-        const previousSelectedTimezone = contactFormNode.querySelector(`.${timezoneListItemClassName}.${timezoneListItemSelectedClassName}`);
-        if (previousSelectedTimezone) {
-          previousSelectedTimezone.classList.remove(timezoneListItemSelectedClassName);
-        }
-
-        selectedTimezoneElement.classList.add(timezoneListItemSelectedClassName);
-
-        currentWeek = currentWeek.tz(moment().tz(), true);
-        selectedDay = selectedDay.tz(moment().tz(), true);
-        setWeek(currentWeek);
-      }
-
-      function getPrettyTimezoneName (timezone) {
-        return `(GMT${moment.tz(timezone).format('Z')}) ${timezone.replace(/_/g, ' ').replace(/\//g, ' - ')}`
-      }
-
-      function renderTimezones () {
-        const currentTimezone = moment().tz();
-
-        moment.tz.names().forEach(timezone => {
-          const timezoneElement = document.createElement('li');
-          timezoneElement.setAttribute('role', 'button');
-          timezoneElement.setAttribute('tabindex', 0);
-          timezoneElement.setAttribute('aria-label', `Select a timezone: ${timezone}`);
-          timezoneElement.setAttribute('class', timezoneListItemClassName);
-          timezoneElement.innerText = getPrettyTimezoneName(timezone);
-          timezoneElement.onclick = () => {onSelectTimezone(timezone, timezoneElement)};
-
-          timezoneElement.onkeydown = (event) => {
-            if (event.keyCode === SPACE_CODE || event.keyCode === RETURN_KEYCODE) {
-              timezoneElement.click();
-            }
-          };
-
-          if (currentTimezone === timezone) {
-            timezoneElement.classList.add(timezoneListItemSelectedClassName);
-          }
-          timezoneList.appendChild(timezoneElement);
-        });
-      }
-
-      function scrollToSelectedTimezone () {
-        const selectedTimezoneElement = contactFormNode.querySelector(`.${timezoneListItemClassName}.${timezoneListItemSelectedClassName}`);
-        timezoneList.scrollTop = selectedTimezoneElement.offsetTop - timezoneSearchDiv.getBoundingClientRect().height;
-      }
-
-    }
-  });
+});
 </script>
 
 <!-- <script>
