@@ -1167,51 +1167,92 @@ $(function () {
   class="form js-form"
   id="automated-scheduling-form"
 >
-  <!-- Select a date and time -->
+  <!-- —— Calendar picker —— -->
   <div class="form__group form__group--required">
     <label for="booking" class="form__label">
       Select a date and time <span class="form__label-required">*</span>
     </label>
-    <!-- hidden field that your calendar widget will populate -->
+    <!-- populated by your calendar widget -->
     <input name="appointment_start_at" type="hidden" value="">
 
     <div class="js-prevent-preview-frame-click">
-      <!-- ——— your existing calendar widget markup ——— -->
       <div class="sb-bookings-appointment__wrapper sb-bookings-appointment--inline">
-        <div class="appointment-calendar__selected-date-wrapper">
-          <span class="appointment-calendar__selected-date"></span>
-          <span class="appointment-calendar__selected-date-error">Select a date and time</span>
+        <!-- Selected day header -->
+        <div
+          class="appointment-calendar__header"
+          style="background:#2ecc71;color:#fff;padding:0.5em;"
+        >
+          Monday, May 26, 2025
         </div>
-        <div class="appointment-calendar">
-          <div class="appointment-calendar__date">
-            <button aria-label="Previous month" class="appointment-calendar__date-btn appointment-calendar__date-btn--prev" type="button">
-              <!-- SVG… -->
-            </button>
-            <button aria-label="Next month" class="appointment-calendar__date-btn appointment-calendar__date-btn--next" type="button">
-              <!-- SVG… -->
-            </button>
-            <div aria-label="Current month" class="appointment-calendar__date-date">
-              September <span class="appointment-calendar__date-date-month">2018</span>
-            </div>
+
+        <!-- Month navigation -->
+        <div class="appointment-calendar__nav">
+          <button type="button" class="appointment-calendar__nav-btn prev">&lt;</button>
+          <div class="appointment-calendar__current-month">May 2025</div>
+          <button type="button" class="appointment-calendar__nav-btn next">&gt;</button>
+        </div>
+
+        <!-- Weekday row -->
+        <ul class="appointment-calendar__weekdays">
+          <li class="appointment-calendar__day">
+            <button type="button" class="appointment-calendar__day-btn selected">26</button>
+          </li>
+          <li class="appointment-calendar__day">
+            <button type="button" class="appointment-calendar__day-btn">27</button>
+          </li>
+          <li class="appointment-calendar__day">
+            <button type="button" class="appointment-calendar__day-btn">28</button>
+          </li>
+          <li class="appointment-calendar__day">
+            <button type="button" class="appointment-calendar__day-btn">29</button>
+          </li>
+          <li class="appointment-calendar__day">
+            <button type="button" class="appointment-calendar__day-btn">30</button>
+          </li>
+          <li class="appointment-calendar__day">
+            <button type="button" class="appointment-calendar__day-btn">31</button>
+          </li>
+          <li class="appointment-calendar__day">
+            <button type="button" class="appointment-calendar__day-btn">1</button>
+          </li>
+        </ul>
+
+        <!-- Time‐slot grid -->
+        <div class="appointment-calendar__slots">
+          <!-- Morning -->
+          <div class="appointment-calendar__day-part morning">
+            <div class="appointment-calendar__day-part-title">Morning</div>
+            <button type="button" class="appointment-calendar__slot">9:00–9:30 am</button>
+            <button type="button" class="appointment-calendar__slot">9:30–10:00 am</button>
+            <button type="button" class="appointment-calendar__slot">10:00–10:30 am</button>
+            <button type="button" class="appointment-calendar__slot">10:30–11:00 am</button>
+            <button type="button" class="appointment-calendar__slot">11:00–11:30 am</button>
+            <button type="button" class="appointment-calendar__slot">11:30–12:00 pm</button>
           </div>
-          <div class="appointment-calendar__weekdays">
-            <!-- …Mon–Sun buttons (same as your snippet)… -->
-          </div>
-          <div class="appointment-calendar__day">
-            <!-- morning / afternoon / evening slots, etc. -->
-          </div>
-          <div class="appointment-calendar__day-empty">
-            <!-- “No availability” graphic/text -->
+          <!-- Afternoon -->
+          <div class="appointment-calendar__day-part afternoon">
+            <div class="appointment-calendar__day-part-title">Afternoon</div>
+            <button type="button" class="appointment-calendar__slot">12:00–12:30 pm</button>
+            <button type="button" class="appointment-calendar__slot">12:30–1:00 pm</button>
+            <button type="button" class="appointment-calendar__slot">1:00–1:30 pm</button>
+            <button type="button" class="appointment-calendar__slot">1:30–2:00 pm</button>
+            <button type="button" class="appointment-calendar__slot">2:00–2:30 pm</button>
+            <button type="button" class="appointment-calendar__slot">2:30–3:00 pm</button>
+            <button type="button" class="appointment-calendar__slot">3:00–3:30 pm</button>
+            <button type="button" class="appointment-calendar__slot">3:30–4:00 pm</button>
+            <button type="button" class="appointment-calendar__slot">4:00–4:30 pm</button>
+            <button type="button" class="appointment-calendar__slot">4:30–5:00 pm</button>
           </div>
         </div>
+
+        <!-- Timezone footer -->
         <div class="appointment-calendar__timezone">
-          <!-- timezone toggle + dropdown -->
+          @(GMT+05:30) Asia – Calcutta
         </div>
       </div>
-      <!-- ———————————————————————————————— -->
     </div>
 
-    <!-- the hidden “booking” field your placeholder script reads/writes -->
+    <!-- hidden field your placeholder script uses -->
     <input
       required
       id="booking"
@@ -1223,7 +1264,7 @@ $(function () {
     />
   </div>
 
-  <!-- Name -->
+  <!-- —— Contact fields —— -->
   <div class="form__group form__group--required">
     <label for="name" class="form__label">
       Name <span class="form__label-required">*</span>
@@ -1235,11 +1276,9 @@ $(function () {
       type="text"
       placeholder="Jane Smith"
       class="form__input contact-form__input"
-      value=""
     />
   </div>
 
-  <!-- Email -->
   <div class="form__group form__group--required">
     <label for="email" class="form__label">
       Email address <span class="form__label-required">*</span>
@@ -1251,11 +1290,9 @@ $(function () {
       type="email"
       placeholder="email@website.com"
       class="form__input contact-form__input"
-      value=""
     />
   </div>
 
-  <!-- Phone -->
   <div class="form__group form__group--required">
     <label for="phone" class="form__label">
       Phone number <span class="form__label-required">*</span>
@@ -1267,17 +1304,16 @@ $(function () {
       type="tel"
       placeholder="555-555-5555"
       class="form__input contact-form__input"
-      value=""
     />
   </div>
 
-  <!-- Services checkboxes -->
   <div class="form__group form__group--checkbox">
-    <label class="form__label">Which service or services are you interested in?</label>
+    <label class="form__label">
+      Which service or services are you interested in?
+    </label>
     <div class="form__checkbox-error" id="checkbox-error-message">
       Please select at least one option.
     </div>
-
     <div class="form__input-checkbox-wrapper">
       <input
         id="service_digital_coaching"
@@ -1316,7 +1352,6 @@ $(function () {
     </div>
   </div>
 
-  <!-- Message -->
   <div class="form__group">
     <label for="message" class="form__label">Message</label>
     <textarea
@@ -1327,7 +1362,7 @@ $(function () {
     ></textarea>
   </div>
 
-  <!-- (optional) customize email subject -->
+  <!-- optional: custom subject line for your Formspree email -->
   <input type="hidden" name="_subject" value="New scheduling request from website" />
 
   <button type="submit" class="sb-button sb-button--form contact-form__btn">
