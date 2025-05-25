@@ -1160,217 +1160,353 @@ $(function () {
     
     <button class="sb-button sb-button--form contact-form__btn" data-component-field="form_details" data-sb-field="button_label" data-sb-is-link="" data-sb-type="text" data-sb-uuid="76da1311-ccad-45fe-89ec-da5054a5baca" type="submit">Submit</button>
 </form>  -->
+<style>
+  /* ─────────────── calendar styles ─────────────── */
+  .appointment-calendar__wrapper {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    font-family: sans-serif;
+  }
+  .appointment-calendar__header {
+    background: #2ecc71;
+    color: #fff;
+    padding: 0.5rem;
+    font-weight: bold;
+  }
+  .appointment-calendar__month-nav,
+  .appointment-calendar__week-nav {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+  }
+  .appointment-calendar__month-btn,
+  .appointment-calendar__week-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+  .appointment-calendar__month-label {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+  }
+  .appointment-calendar__weekdays {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    justify-content: space-around;
+  }
+  .appointment-calendar__day-btn {
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    background: #fff;
+    cursor: pointer;
+  }
+  .appointment-calendar__day-btn.selected {
+    background: #000;
+    color: #fff;
+  }
+  .appointment-calendar__slots {
+    display: flex;
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+  .appointment-calendar__day-part {
+    flex: 1;
+  }
+  .appointment-calendar__day-part-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .appointment-calendar__slot {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.4rem;
+    border: 1px solid #000;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 2px;
+  }
+  .appointment-calendar__slot.selected {
+    background: #2ecc71;
+    color: #fff;
+  }
+  .appointment-calendar__timezone {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+  }
+</style>
 
-<form
-  action="https://formspree.io/f/xpwdendr"
-  method="POST"
-  class="form js-form"
-  id="automated-scheduling-form"
->
-  <!-- —— Calendar picker —— -->
+<form action="https://formspree.io/f/xpwdendr" method="POST" class="form js-form" id="automated-scheduling-form">
+
+  <!-- ───────────── calendar widget ───────────── -->
   <div class="form__group form__group--required">
     <label for="booking" class="form__label">
       Select a date and time <span class="form__label-required">*</span>
     </label>
-    <!-- populated by your calendar widget -->
-    <input name="appointment_start_at" type="hidden" value="">
+    <div class="appointment-calendar__wrapper">
+      <!-- header -->
+      <div class="appointment-calendar__header">Loading…</div>
 
-    <div class="js-prevent-preview-frame-click">
-      <div class="sb-bookings-appointment__wrapper sb-bookings-appointment--inline">
-        <!-- Selected day header -->
-        <div
-          class="appointment-calendar__header"
-          style="background:#2ecc71;color:#fff;padding:0.5em;"
-        >
-          Monday, May 26, 2025
+      <!-- month nav -->
+      <div class="appointment-calendar__month-nav">
+        <button type="button" class="appointment-calendar__month-btn prev-month">&lt;</button>
+        <div class="appointment-calendar__month-label">Loading…</div>
+        <button type="button" class="appointment-calendar__month-btn next-month">&gt;</button>
+      </div>
+
+      <!-- week nav -->
+      <div class="appointment-calendar__week-nav">
+        <button type="button" class="appointment-calendar__week-btn prev-week">&lt;</button>
+        <ul class="appointment-calendar__weekdays"></ul>
+        <button type="button" class="appointment-calendar__week-btn next-week">&gt;</button>
+      </div>
+
+      <!-- time slots -->
+      <div class="appointment-calendar__slots">
+        <div class="appointment-calendar__day-part morning">
+          <div class="appointment-calendar__day-part-title">Morning</div>
+          <button type="button" class="appointment-calendar__slot">9:00–9:30 am</button>
+          <button type="button" class="appointment-calendar__slot">9:30–10:00 am</button>
+          <button type="button" class="appointment-calendar__slot">10:00–10:30 am</button>
+          <button type="button" class="appointment-calendar__slot">10:30–11:00 am</button>
+          <button type="button" class="appointment-calendar__slot">11:00–11:30 am</button>
+          <button type="button" class="appointment-calendar__slot">11:30–12:00 pm</button>
         </div>
-
-        <!-- Month navigation -->
-        <div class="appointment-calendar__nav">
-          <button type="button" class="appointment-calendar__nav-btn prev">&lt;</button>
-          <div class="appointment-calendar__current-month">May 2025</div>
-          <button type="button" class="appointment-calendar__nav-btn next">&gt;</button>
-        </div>
-
-        <!-- Weekday row -->
-        <ul class="appointment-calendar__weekdays">
-          <li class="appointment-calendar__day">
-            <button type="button" class="appointment-calendar__day-btn selected">26</button>
-          </li>
-          <li class="appointment-calendar__day">
-            <button type="button" class="appointment-calendar__day-btn">27</button>
-          </li>
-          <li class="appointment-calendar__day">
-            <button type="button" class="appointment-calendar__day-btn">28</button>
-          </li>
-          <li class="appointment-calendar__day">
-            <button type="button" class="appointment-calendar__day-btn">29</button>
-          </li>
-          <li class="appointment-calendar__day">
-            <button type="button" class="appointment-calendar__day-btn">30</button>
-          </li>
-          <li class="appointment-calendar__day">
-            <button type="button" class="appointment-calendar__day-btn">31</button>
-          </li>
-          <li class="appointment-calendar__day">
-            <button type="button" class="appointment-calendar__day-btn">1</button>
-          </li>
-        </ul>
-
-        <!-- Time‐slot grid -->
-        <div class="appointment-calendar__slots">
-          <!-- Morning -->
-          <div class="appointment-calendar__day-part morning">
-            <div class="appointment-calendar__day-part-title">Morning</div>
-            <button type="button" class="appointment-calendar__slot">9:00–9:30 am</button>
-            <button type="button" class="appointment-calendar__slot">9:30–10:00 am</button>
-            <button type="button" class="appointment-calendar__slot">10:00–10:30 am</button>
-            <button type="button" class="appointment-calendar__slot">10:30–11:00 am</button>
-            <button type="button" class="appointment-calendar__slot">11:00–11:30 am</button>
-            <button type="button" class="appointment-calendar__slot">11:30–12:00 pm</button>
-          </div>
-          <!-- Afternoon -->
-          <div class="appointment-calendar__day-part afternoon">
-            <div class="appointment-calendar__day-part-title">Afternoon</div>
-            <button type="button" class="appointment-calendar__slot">12:00–12:30 pm</button>
-            <button type="button" class="appointment-calendar__slot">12:30–1:00 pm</button>
-            <button type="button" class="appointment-calendar__slot">1:00–1:30 pm</button>
-            <button type="button" class="appointment-calendar__slot">1:30–2:00 pm</button>
-            <button type="button" class="appointment-calendar__slot">2:00–2:30 pm</button>
-            <button type="button" class="appointment-calendar__slot">2:30–3:00 pm</button>
-            <button type="button" class="appointment-calendar__slot">3:00–3:30 pm</button>
-            <button type="button" class="appointment-calendar__slot">3:30–4:00 pm</button>
-            <button type="button" class="appointment-calendar__slot">4:00–4:30 pm</button>
-            <button type="button" class="appointment-calendar__slot">4:30–5:00 pm</button>
-          </div>
-        </div>
-
-        <!-- Timezone footer -->
-        <div class="appointment-calendar__timezone">
-          @(GMT+05:30) Asia – Calcutta
+        <div class="appointment-calendar__day-part afternoon">
+          <div class="appointment-calendar__day-part-title">Afternoon</div>
+          <button type="button" class="appointment-calendar__slot">12:00–12:30 pm</button>
+          <button type="button" class="appointment-calendar__slot">12:30–1:00 pm</button>
+          <button type="button" class="appointment-calendar__slot">1:00–1:30 pm</button>
+          <button type="button" class="appointment-calendar__slot">1:30–2:00 pm</button>
+          <button type="button" class="appointment-calendar__slot">2:00–2:30 pm</button>
+          <button type="button" class="appointment-calendar__slot">2:30–3:00 pm</button>
+          <button type="button" class="appointment-calendar__slot">3:00–3:30 pm</button>
+          <button type="button" class="appointment-calendar__slot">3:30–4:00 pm</button>
+          <button type="button" class="appointment-calendar__slot">4:00–4:30 pm</button>
+          <button type="button" class="appointment-calendar__slot">4:30–5:00 pm</button>
         </div>
       </div>
+
+      <!-- timezone -->
+      <div class="appointment-calendar__timezone">Loading timezone…</div>
     </div>
 
-    <!-- hidden field your placeholder script uses -->
+    <!-- hidden field -->
     <input
       required
       id="booking"
       name="booking"
       type="hidden"
       class="form__input contact-form__input js-booking-placeholder"
-      placeholder="Select a date and time..."
+      placeholder="Select a date and time…"
       value=""
     />
   </div>
 
-  <!-- —— Contact fields —— -->
+  <!-- ───────────── other contact fields ───────────── -->
   <div class="form__group form__group--required">
-    <label for="name" class="form__label">
-      Name <span class="form__label-required">*</span>
-    </label>
-    <input
-      required
-      id="name"
-      name="name"
-      type="text"
-      placeholder="Jane Smith"
-      class="form__input contact-form__input"
-    />
+    <label for="name" class="form__label">Name <span class="form__label-required">*</span></label>
+    <input required id="name" name="name" type="text" placeholder="Jane Smith" class="form__input contact-form__input" />
   </div>
-
   <div class="form__group form__group--required">
-    <label for="email" class="form__label">
-      Email address <span class="form__label-required">*</span>
-    </label>
-    <input
-      required
-      id="email"
-      name="email"
-      type="email"
-      placeholder="email@website.com"
-      class="form__input contact-form__input"
-    />
+    <label for="email" class="form__label">Email address <span class="form__label-required">*</span></label>
+    <input required id="email" name="email" type="email" placeholder="email@website.com" class="form__input contact-form__input" />
   </div>
-
   <div class="form__group form__group--required">
-    <label for="phone" class="form__label">
-      Phone number <span class="form__label-required">*</span>
-    </label>
-    <input
-      required
-      id="phone"
-      name="phone"
-      type="tel"
-      placeholder="555-555-5555"
-      class="form__input contact-form__input"
-    />
+    <label for="phone" class="form__label">Phone number <span class="form__label-required">*</span></label>
+    <input required id="phone" name="phone" type="tel" placeholder="555-555-5555" class="form__input contact-form__input" />
   </div>
-
   <div class="form__group form__group--checkbox">
-    <label class="form__label">
-      Which service or services are you interested in?
-    </label>
-    <div class="form__checkbox-error" id="checkbox-error-message">
-      Please select at least one option.
+    <label class="form__label">Which service or services are you interested in?</label>
+    <div class="form__checkbox-error" id="checkbox-error-message">Please select at least one option.</div>
+    <div class="form__input-checkbox-wrapper">
+      <input id="svc1" name="services[]" type="checkbox" value="Digital coaching and training" class="form__input form__input--checkbox" />
+      <label for="svc1" class="form__label form__label--font-normal">Digital coaching and training</label>
     </div>
     <div class="form__input-checkbox-wrapper">
-      <input
-        id="service_digital_coaching"
-        name="services[]"
-        type="checkbox"
-        value="Digital coaching and training"
-        class="form__input form__input--checkbox"
-      />
-      <label for="service_digital_coaching" class="form__label form__label--font-normal">
-        Digital coaching and training
-      </label>
+      <input id="svc2" name="services[]" type="checkbox" value="Consulting services" class="form__input form__input--checkbox" />
+      <label for="svc2" class="form__label form__label--font-normal">Consulting services</label>
     </div>
     <div class="form__input-checkbox-wrapper">
-      <input
-        id="service_consulting"
-        name="services[]"
-        type="checkbox"
-        value="Consulting services"
-        class="form__input form__input--checkbox"
-      />
-      <label for="service_consulting" class="form__label form__label--font-normal">
-        Consulting services
-      </label>
-    </div>
-    <div class="form__input-checkbox-wrapper">
-      <input
-        id="service_exec_support"
-        name="services[]"
-        type="checkbox"
-        value="Executive role support"
-        class="form__input form__input--checkbox"
-      />
-      <label for="service_exec_support" class="form__label form__label--font-normal">
-        Executive role support
-      </label>
+      <input id="svc3" name="services[]" type="checkbox" value="Executive role support" class="form__input form__input--checkbox" />
+      <label for="svc3" class="form__label form__label--font-normal">Executive role support</label>
     </div>
   </div>
-
   <div class="form__group">
     <label for="message" class="form__label">Message</label>
-    <textarea
-      id="message"
-      name="message"
-      rows="4"
-      class="form__input form__input--textarea contact-form__textarea"
-    ></textarea>
+    <textarea id="message" name="message" rows="4" class="form__input form__input--textarea contact-form__textarea"></textarea>
   </div>
 
-  <!-- optional: custom subject line for your Formspree email -->
+  <!-- optional: custom email subject -->
   <input type="hidden" name="_subject" value="New scheduling request from website" />
 
-  <button type="submit" class="sb-button sb-button--form contact-form__btn">
-    Submit
-  </button>
+  <button type="submit" class="sb-button sb-button--form contact-form__btn">Submit</button>
 </form>
 
-    <script>
+<script>
+  (function() {
+    const headerEl = document.querySelector('.appointment-calendar__header');
+    const monthLabelEl = document.querySelector('.appointment-calendar__month-label');
+    const prevMonthBtn = document.querySelector('.prev-month');
+    const nextMonthBtn = document.querySelector('.next-month');
+    const prevWeekBtn = document.querySelector('.prev-week');
+    const nextWeekBtn = document.querySelector('.next-week');
+    const weekdaysUl = document.querySelector('.appointment-calendar__weekdays');
+    const slotButtons = document.querySelectorAll('.appointment-calendar__slot');
+    const bookingInput = document.querySelector('input[name="booking"]');
+    const timezoneEl = document.querySelector('.appointment-calendar__timezone');
+
+    const morningSlots = [
+      '9:00–9:30 am','9:30–10:00 am','10:00–10:30 am',
+      '10:30–11:00 am','11:00–11:30 am','11:30–12:00 pm'
+    ];
+    const afternoonSlots = [
+      '12:00–12:30 pm','12:30–1:00 pm','1:00–1:30 pm',
+      '1:30–2:00 pm','2:00–2:30 pm','2:30–3:00 pm',
+      '3:00–3:30 pm','3:30–4:00 pm','4:00–4:30 pm','4:30–5:00 pm'
+    ];
+
+    // state
+    let selectedDate = new Date();
+    let weekStart = getMonday(selectedDate);
+
+    // helpers
+    function pad(n){ return String(n).padStart(2,'0'); }
+    function getMonday(d) {
+      const day = d.getDay(), diff = (day + 6) % 7;
+      return new Date(d.getFullYear(), d.getMonth(), d.getDate() - diff);
+    }
+    function formatHeader(date) {
+      return date.toLocaleDateString(undefined, {
+        weekday:'long', month:'long', day:'numeric', year:'numeric'
+      });
+    }
+    function formatMonthLabel(date) {
+      return date.toLocaleDateString(undefined, {
+        month:'long', year:'numeric'
+      });
+    }
+    function renderWeek() {
+      weekdaysUl.innerHTML = '';
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(weekStart);
+        d.setDate(weekStart.getDate() + i);
+        const li = document.createElement('li');
+        li.className = 'appointment-calendar__day';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'appointment-calendar__day-btn';
+        btn.textContent = d.getDate();
+        btn.dataset.date = d.toISOString().split('T')[0];
+        if (d.toDateString() === selectedDate.toDateString()) {
+          btn.classList.add('selected');
+        }
+        btn.addEventListener('click', () => {
+          selectedDate = new Date(btn.dataset.date);
+          weekStart = getMonday(selectedDate);
+          updateAll();
+        });
+        li.appendChild(btn);
+        weekdaysUl.appendChild(li);
+      }
+    }
+    function updateHeaderAndMonth() {
+      headerEl.textContent = formatHeader(selectedDate);
+      monthLabelEl.textContent = formatMonthLabel(selectedDate);
+    }
+    function clearSlotSelection() {
+      document.querySelectorAll('.appointment-calendar__slot.selected')
+        .forEach(x => x.classList.remove('selected'));
+      bookingInput.value = '';
+    }
+    function attachSlotHandlers() {
+      slotButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          slotButtons.forEach(x => x.classList.remove('selected'));
+          btn.classList.add('selected');
+
+          // parse time
+          const [startStr] = btn.textContent.split('–');
+          const m = startStr.match(/(\d+):(\d+)\s*(am|pm)/i);
+          let hr = parseInt(m[1], 10), mn = parseInt(m[2], 10);
+          if (m[3].toLowerCase() === 'pm' && hr < 12) hr += 12;
+          if (m[3].toLowerCase() === 'am' && hr === 12) hr = 0;
+
+          const dt = new Date(selectedDate);
+          dt.setHours(hr, mn, 0, 0);
+
+          // timezone offset
+          const offsetMin = -dt.getTimezoneOffset();
+          const sign = offsetMin >= 0 ? '+' : '-';
+          const oh = pad(Math.floor(Math.abs(offsetMin)/60));
+          const om = pad(Math.abs(offsetMin)%60);
+
+          const isoLocal = 
+            `${dt.getFullYear()}-${pad(dt.getMonth()+1)}-${pad(dt.getDate())}` +
+            `T${pad(dt.getHours())}:${pad(dt.getMinutes())}:00` +
+            `${sign}${oh}:${om}`;
+
+          bookingInput.value = isoLocal;
+        });
+      });
+    }
+    function renderTimezone() {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const offsetMin = -new Date().getTimezoneOffset();
+      const sign = offsetMin >= 0 ? '+' : '-';
+      const oh = pad(Math.floor(Math.abs(offsetMin)/60));
+      const om = pad(Math.abs(offsetMin)%60);
+      const label = tz.replace('/', ' – ').replace('Kolkata','Calcutta');
+      timezoneEl.textContent = `(GMT${sign}${oh}:${om}) ${label}`;
+    }
+
+    // nav handlers
+    prevWeekBtn.addEventListener('click', ()=>{
+      weekStart.setDate(weekStart.getDate()-7);
+      renderWeek();
+    });
+    nextWeekBtn.addEventListener('click', ()=>{
+      weekStart.setDate(weekStart.getDate()+7);
+      renderWeek();
+    });
+    prevMonthBtn.addEventListener('click', ()=>{
+      selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth()-1, 1);
+      weekStart = getMonday(selectedDate);
+      updateAll();
+    });
+    nextMonthBtn.addEventListener('click', ()=>{
+      selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth()+1, 1);
+      weekStart = getMonday(selectedDate);
+      updateAll();
+    });
+
+    // initial render
+    function updateAll(){
+      renderWeek();
+      updateHeaderAndMonth();
+      clearSlotSelection();
+      renderTimezone();
+    }
+    attachSlotHandlers();
+    updateAll();
+
+  })();
+</script>
+
+<!--     <script>
       $(function() {
   var $parent = $('#contact-form-4c38e346-5982-48a3-bdc8-3fb73a302cd0'),
       $form = $parent.find('form.js-form'),
@@ -1813,7 +1949,7 @@ $(function () {
 });
 
     </script>
-
+ -->
   
 </div>
 
